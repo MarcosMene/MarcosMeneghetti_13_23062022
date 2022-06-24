@@ -1,20 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
+import Profile from "./pages/Profile/Profile";
+import Transitions from "./pages/Transitions/Transitions";
 import "./App.scss";
+
 function App() {
   return (
     <Router>
       <Header />
-      <main className="main">
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          {/* <Route exact path="/user/:id" element={<User />} />
-          <Route path="*" element={<Page404 />} /> */}
-        </Routes>
-      </main>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/profile/" element={<Profile />} />
+        <Route path="/transitions/" element={<Transitions />} />
+      </Routes>
       <Footer />
     </Router>
   );

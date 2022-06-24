@@ -1,0 +1,56 @@
+.transitions {
+    padding-top: 5rem;
+    background-color: #e0e6ed;
+    padding-bottom: 2rem;
+}
+
+.transitions-wrapper {
+
+    width: 100%;
+    margin: auto;
+
+    .transitions-list-title,
+    .accordeon {
+        display: grid;
+        grid-template-columns: 1fr 4fr 5fr 5fr 4fr;
+        font-weight: bold;
+        padding: 0 24px;
+
+        .transitions-list-text {
+            font-size: .7rem;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+        }
+    }
+
+    .accordeon {
+        background-color: #fff;
+        border: 1px solid #c3cfd9;
+        padding: 10px 24px;
+        font-size: .7rem;
+    }
+
+    @media (min-width: 720px) {
+        & {
+            width: 80%;
+        }
+
+        .transitions-list-title {
+            .transitions-list-text {
+                font-size: .9rem;
+            }
+        }
+
+        .accordeon {
+            font-size: 1.2rem;
+            padding: 20px 24px;
+        }
+
+    }
+
+
+
+}

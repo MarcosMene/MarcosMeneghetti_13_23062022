@@ -1,0 +1,27 @@
+.form-change-name {
+
+    margin: 0 auto;
+}
+
+.inputs-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .input-wrapper {
+        width: 200px;
+        margin: 10px 20px;
+    }
+
+}
+
+.button-form {
+    margin: 10px 20px;
+    width: 100px;
+    padding: 8px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-color: #b3b3f0;
+    background-color: #fff;
+    color: rgb(102, 90, 245);
+}
