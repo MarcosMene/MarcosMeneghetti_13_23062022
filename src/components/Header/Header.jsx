@@ -21,7 +21,7 @@ const Header = () => {
       {/* </Link> */}
 
       <div>
-        <Link to="/sign-in" className="main-nav-item">
+        <Link to="/login" className="main-nav-item">
           <FontAwesomeIcon icon={faCircleUser} />
 
           <span>Sign In</span>
