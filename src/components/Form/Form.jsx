@@ -28,7 +28,7 @@ const Form = () => {
           </label>
         </div>
 
-        <Link to="/user" className="sign-in-button">
+        <Link to="/profile" className="sign-in-button">
           Sign In
         </Link>
       </form>

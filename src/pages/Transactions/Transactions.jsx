@@ -1,7 +1,7 @@
 import TransitionsAccount from "../../components/TransitionsAccount/TransitionsAccount";
 import TransitionsList from "../../components/TransitionsList/TransitionsList";
 
-const Transitions = () => {
+const Transactions = () => {
   return (
     <main>
       <TransitionsAccount
@@ -17,4 +17,4 @@ const Transitions = () => {
   );
 };
 
-export default Transitions;
+export default Transactions;

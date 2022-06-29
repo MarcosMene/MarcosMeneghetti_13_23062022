@@ -4,7 +4,7 @@ import Login from "./pages/Login/Login";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
-import Transitions from "./pages/Transitions/Transitions";
+import Transactions from "./pages/Transactions/Transactions";
 import "./App.scss";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login/" element={<Login />} />
         <Route path="/profile/" element={<Profile />} />
-        <Route path="/transactions/" element={<Transitions />} />
+        <Route path="/transactions/" element={<Transactions />} />
       </Routes>
       <Footer />
     </Router>

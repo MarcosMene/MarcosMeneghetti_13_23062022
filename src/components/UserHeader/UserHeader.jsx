@@ -5,14 +5,13 @@ import "./UserHeader.scss";
 const UserHeader = () => {
   const [showForm, setShowForm] = useState("false");
 
-  const handleShowForm = () => {
-    setShowForm(false);
-    console.log(setShowForm);
-  };
-  const handleHideForm = (e) => {
+  // const handleShowForm = () => {
+  //   setShowForm(false);
+  //   console.log(setShowForm);
+  // };
+  const handleForm = (e) => {
     e.preventDefault(true);
     setShowForm(!showForm);
-    console.log(setShowForm);
   };
   return (
     <div className="header">
@@ -22,7 +21,7 @@ const UserHeader = () => {
         Tony Jarvis!
       </h1>
       {showForm ? (
-        <button className="edit-button" onClick={handleShowForm}>
+        <button className="edit-button" onClick={handleForm}>
           Edit Name
         </button>
       ) : (
@@ -40,7 +39,7 @@ const UserHeader = () => {
             <button className="button-form" type="submit">
               save
             </button>
-            <button className="button-form" onClick={handleHideForm}>
+            <button className="button-form" onClick={handleForm}>
               cancel
             </button>
           </div>
