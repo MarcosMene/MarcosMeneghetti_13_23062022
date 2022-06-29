@@ -1,7 +1,7 @@
 import React from "react";
 import "./TransitionsAccount.scss";
 
-const TransitionsAccount = ({ title, amount, amountDescription }) => {
+const TransactionsAccount = ({ title, amount, amountDescription }) => {
   return (
     <section className="transition-account">
       <div className="transition-account-content-wrapper">
@@ -15,4 +15,4 @@ const TransitionsAccount = ({ title, amount, amountDescription }) => {
   );
 };
 
-export default TransitionsAccount;
+export default TransactionsAccount;
