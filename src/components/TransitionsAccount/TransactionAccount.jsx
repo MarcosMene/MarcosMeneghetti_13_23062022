@@ -1,5 +1,5 @@
 import React from "react";
-import "./TransitionsAccount.scss";
+import "./TransactionAccount.scss";
 
 const TransactionsAccount = ({ title, amount, amountDescription }) => {
   return (

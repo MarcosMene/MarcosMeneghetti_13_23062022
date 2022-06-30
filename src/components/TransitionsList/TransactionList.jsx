@@ -1,4 +1,4 @@
-import "./TransitionsList.scss";
+import "./TransactionList.scss";
 
 import Accordeons from "../../Accordeons/Accordeons";
 

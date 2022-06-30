@@ -10,7 +10,7 @@ const UserHeader = () => {
   //   console.log(setShowForm);
   // };
   const handleForm = (e) => {
-    e.preventDefault(true);
+    e.preventDefault();
     setShowForm(!showForm);
   };
   return (
@@ -36,7 +36,7 @@ const UserHeader = () => {
             </div>
           </div>
           <div className="form-buttons">
-            <button className="button-form" type="submit">
+            <button className="button-form" type="submit" onClick={handleForm}>
               save
             </button>
             <button className="button-form" onClick={handleForm}>

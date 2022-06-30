@@ -1,5 +1,5 @@
-import TransitionsAccount from "../../components/TransitionsAccount/TransitionsAccount";
-import TransitionsList from "../../components/TransitionsList/TransitionsList";
+import TransitionsAccount from "../../components/TransitionsAccount/TransactionAccount";
+import TransitionsList from "../../components/TransitionsList/TransactionList";
 
 const Transactions = () => {
   return (
