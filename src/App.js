@@ -4,7 +4,7 @@ import Login from "./pages/Login/Login";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
-import Transactions from "./pages/Transactions/Transactions";
+import Transactions from "./pages/TransactionsTitles/TransactionsTitles";
 import "./App.scss";
 
 function App() {

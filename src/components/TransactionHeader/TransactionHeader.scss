@@ -1,4 +1,4 @@
-.transition-account {
+.transaction-account {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,26 +12,26 @@
 
 }
 
-.transition-account-title {
+.transaction-account-title {
     margin: 0;
     padding: 0;
     font-size: 1rem;
     font-weight: bold;
 }
 
-.transition-account-amount {
+.transaction-account-amount {
     margin: 0;
     font-size: 2.5rem;
     font-weight: bold;
 }
 
-.transition-account-amount-description {
+.transaction-account-amount-description {
     margin: 0;
 }
 
 
 
-.transition-account-content-wrapper {
+.transaction-account-content-wrapper {
     width: 100%;
     flex: 1;
 }
@@ -40,11 +40,11 @@
 
 
 @media (min-width: 720px) {
-    .transition-account {
+    .transaction-account {
         flex-direction: row;
     }
 
-    .transition-account-content-wrapper.cta {
+    .transaction-account-content-wrapper.cta {
         flex: 0;
     }
 

@@ -1,22 +1,21 @@
-.transitions {
+.transactions {
     padding-top: 5rem;
     background-color: #e0e6ed;
     padding-bottom: 2rem;
 }
 
-.transitions-wrapper {
+.transactions-wrapper {
 
     width: 100%;
     margin: auto;
 
-    .transitions-list-title,
-    .accordeon {
+    .transactions-list-title {
         display: grid;
         grid-template-columns: 1fr 4fr 5fr 5fr 4fr;
         font-weight: bold;
         padding: 0 24px;
 
-        .transitions-list-text {
+        .transactions-list-text {
             font-size: .7rem;
         }
 
@@ -38,8 +37,8 @@
             width: 80%;
         }
 
-        .transitions-list-title {
-            .transitions-list-text {
+        .transactions-list-title {
+            .transactions-list-text {
                 font-size: .9rem;
             }
         }

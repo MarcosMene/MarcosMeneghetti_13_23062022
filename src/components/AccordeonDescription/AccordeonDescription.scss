@@ -1,0 +1,58 @@
+.transaction-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #fff;
+
+}
+
+.transaction-type,
+.transaction-category,
+.transaction-notes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 3%;
+    flex-wrap: wrap;
+    font-weight: bold;
+    font-size: 12px;
+
+    .transaction-category-input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+
+
+        .sign-in-button.short {
+            padding: 0;
+            margin: auto;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            font-size: 12px;
+
+        }
+    }
+
+    p {
+        margin: 10px 0;
+    }
+
+    span {
+        margin-left: 10px;
+    }
+
+    @media (min-width: 720px) {
+
+
+        & {
+            font-size: 16px;
+            padding-left: 10%;
+        }
+
+    }
+
+
+}

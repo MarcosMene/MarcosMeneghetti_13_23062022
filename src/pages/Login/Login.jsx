@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./Login.scss";
@@ -14,13 +14,13 @@ const Login = () => {
           <div className="input-wrapper">
             <label htmlFor="username">
               Username
-              <input type="text" id="username" />
+              <input type="text" id="username" autoComplete="off" />
             </label>
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">
               Password
-              <input type="password" id="password" />
+              <input type="password" id="password" autoComplete="off" />
             </label>
           </div>
           <div className="input-remember">
@@ -30,9 +30,9 @@ const Login = () => {
             </label>
           </div>
 
-          <button to="/user" className="sign-in-button">
+          <Link to="/profile" className="sign-in-button">
             Sign In
-          </button>
+          </Link>
         </form>
       </section>
     </main>
