@@ -1,11 +1,30 @@
 import React from "react";
 import Logo from "../../assets/argentBankLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import "./Header.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../../features/auth/authSlice";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
+  //on logout function
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
+
+  const navigateLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">
@@ -17,15 +36,29 @@ const Header = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       {/* <Link to="/" className="main-nav-logo"> */}
-
       {/* </Link> */}
-
-      <div>
-        <Link to="/login" className="main-nav-item">
-          <FontAwesomeIcon icon={faCircleUser} />
-
-          <span>Sign In</span>
-        </Link>
+      <div className="nav-user">
+        {user ? (
+          <>
+            <FontAwesomeIcon icon={faCircleUser} />
+            <span>{user.body.firstName}</span>
+            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+            <button className="login-nav-item" onClick={onLogout}>
+              SIGN OUT
+            </button>
+          </>
+        ) : (
+          <>
+            <FontAwesomeIcon icon={faCircleUser} />
+            <button
+              to="/login"
+              className="login-nav-item sign-in-logo"
+              onClick={navigateLogin}
+            >
+              SIGN IN
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );

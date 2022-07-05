@@ -1,6 +1,6 @@
 import TransactionsAccount from "../../components/TransactionHeader/TransactionHeader";
 import Accordeons from "../../components/Accordeons/Accordeons";
-import { infoTransactions } from "../../Services/infoTransactions";
+import { infoTransactions } from "../../mock/infoTransactions";
 import "./TransactionsTitles.scss";
 
 const Transactions = () => {

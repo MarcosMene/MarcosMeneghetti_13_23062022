@@ -10,7 +10,7 @@ export const infoTransactions = [
     id: 2,
     date: "june 20th, 2020",
     description: "Golden Sun Bakery",
-    amount: "$34.00",
+    amount: "$38.00",
     balance: "$882.79",
   },
   {

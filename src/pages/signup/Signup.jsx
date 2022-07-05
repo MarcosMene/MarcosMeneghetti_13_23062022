@@ -1,20 +1,24 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import "./Login.scss";
+import { faIdBadge } from "@fortawesome/free-solid-svg-icons";
+import "./Signup.scss";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
+import { signup, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
-const Login = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
   });
 
-  const { email, password } = formData;
+  const { email, password, firstName, lastName } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +36,7 @@ const Login = () => {
       navigate("/profile");
     }
     //all info back to initial state of action reset
-    dispatch(reset());
+    dispatch(reset()); /// nao sei se vai aqui
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -49,13 +53,19 @@ const Login = () => {
       toast.error("You need enter a valable email");
     } else if (password.length < 3) {
       toast.error("Passwords must be at least 4 characters");
+    } else if (firstName.length === 0) {
+      toast.error("first name is required");
+    } else if (lastName.length === 0) {
+      toast.error("first name is required");
     } else {
       const userData = {
         email,
         password,
+        firstName,
+        lastName,
       };
 
-      dispatch(login(userData));
+      dispatch(signup(userData));
     }
   };
 
@@ -66,8 +76,8 @@ const Login = () => {
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
-        <FontAwesomeIcon icon={faCircleUser} className="fa-lg" />
-        <h1>Sign In</h1>
+        <FontAwesomeIcon icon={faIdBadge} className="fa-lg" />
+        <h1>Sign Up</h1>
         <form onSubmit={onSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">
@@ -97,12 +107,41 @@ const Login = () => {
               />
             </label>
           </div>
+          <div className="input-wrapper">
+            <label htmlFor="firstname">
+              First name
+              <input
+                autoComplete="off"
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={firstName}
+                placeholder="Enter first name"
+                onChange={onChange}
+              />
+            </label>
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="lastname">
+              Last name
+              <input
+                autoComplete="off"
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={lastName}
+                placeholder="Enter last name"
+                onChange={onChange}
+              />
+            </label>
+          </div>
+
           <button type="submit" className="sign-in-button">
-            Sign In
+            Sign Up
           </button>
           <div className="sign-button">
             <span>
-              Not a member yet? <Link to="/signup">Sign up</Link>
+              Already user? <Link to="/login">Sign in</Link>
             </span>
           </div>
         </form>
@@ -111,4 +150,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

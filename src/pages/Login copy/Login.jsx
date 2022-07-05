@@ -1,72 +1,34 @@
+import React from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "./Login.scss";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
-import Spinner from "../../components/spinner/Spinner";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    rememberMe: false,
   });
 
-  const { email, password } = formData;
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
-    if (isSuccess || user) {
-      navigate("/profile");
-    }
-    //all info back to initial state of action reset
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  const { username, password, rememberMe } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
-      ...prevState, //we want the other fields
+      ...prevState,
       [e.target.name]: e.target.value,
     }));
+    console.log(e.target.value);
   };
-
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (email.length === 0) {
-      toast.error("You need enter a valable email");
-    } else if (password.length < 3) {
-      toast.error("Passwords must be at least 4 characters");
-    } else {
-      const userData = {
-        email,
-        password,
-      };
-
-      dispatch(login(userData));
-    }
   };
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
-        <FontAwesomeIcon icon={faCircleUser} className="fa-lg" />
+        <FontAwesomeIcon icon={faCircleUser} />
         <h1>Sign In</h1>
         <form onSubmit={onSubmit}>
           <div className="input-wrapper">
@@ -75,9 +37,9 @@ const Login = () => {
               <input
                 autoComplete="off"
                 type="email"
-                id="email"
-                name="email"
-                value={email}
+                id="username"
+                name="username"
+                value={username}
                 placeholder="Enter your email"
                 onChange={onChange}
               />
@@ -97,14 +59,21 @@ const Login = () => {
               />
             </label>
           </div>
+          <div className="input-remember">
+            <label htmlFor="remember-me">
+              <input
+                type="checkbox"
+                name="remember-me"
+                id="remember-me"
+                onChange={onChange}
+              />
+              Remember me
+            </label>
+          </div>
+
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
-          <div className="sign-button">
-            <span>
-              Not a member yet? <Link to="/signup">Sign up</Link>
-            </span>
-          </div>
         </form>
       </section>
     </main>
