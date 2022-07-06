@@ -36,7 +36,7 @@ const SignUp = () => {
       navigate("/profile");
     }
     //all info back to initial state of action reset
-    dispatch(reset()); /// nao sei se vai aqui
+    // dispatch(reset()); /// nao sei se vai aqui
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {

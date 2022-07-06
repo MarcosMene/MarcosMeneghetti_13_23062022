@@ -32,7 +32,7 @@ const Login = () => {
       navigate("/profile");
     }
     //all info back to initial state of action reset
-    dispatch(reset());
+    // dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {

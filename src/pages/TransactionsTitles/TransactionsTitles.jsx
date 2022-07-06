@@ -2,8 +2,21 @@ import TransactionsAccount from "../../components/TransactionHeader/TransactionH
 import Accordeons from "../../components/Accordeons/Accordeons";
 import { infoTransactions } from "../../mock/infoTransactions";
 import "./TransactionsTitles.scss";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Transactions = () => {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
   return (
     <main>
       <TransactionsAccount

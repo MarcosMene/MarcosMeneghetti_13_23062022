@@ -1,14 +1,13 @@
 import { useState } from "react";
 // import ProfileForm from "../Profileform/ProfileForm";
+import { useSelector } from "react-redux";
 import "./UserHeader.scss";
 
 const UserHeader = () => {
   const [showForm, setShowForm] = useState("false");
 
-  // const handleShowForm = () => {
-  //   setShowForm(false);
-  //   console.log(setShowForm);
-  // };
+  const { user } = useSelector((state) => state.auth);
+
   const handleForm = (e) => {
     e.preventDefault();
     setShowForm(!showForm);
@@ -18,7 +17,8 @@ const UserHeader = () => {
       <h1>
         Welcome back
         <br />
-        Tony Jarvis!
+        <span>{user && user.body.firstName}</span>
+        <span>{user && user.body.lastName}</span>
       </h1>
       {showForm ? (
         <button className="edit-button" onClick={handleForm}>

@@ -1,7 +1,21 @@
 import React from "react";
 import UserHeader from "../../components/UserHeader/UserHeader";
 import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
   return (
     <main className="main bg-dark">
       <UserHeader />
