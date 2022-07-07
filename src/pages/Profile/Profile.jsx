@@ -3,13 +3,16 @@ import UserHeader from "../../components/UserHeader/UserHeader";
 import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { profile } from "../../features/profile/profileSlice";
 const Profile = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
 
-  console.log(user);
+  dispatch(profile(user));
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -18,6 +21,7 @@ const Profile = () => {
 
   return (
     <main className="main bg-dark">
+      <div>{user.body.token}</div>
       <UserHeader />
       <h2 className="sr-only">Accounts</h2>
 

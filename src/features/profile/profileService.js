@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3001/api/v1/user/";
 
-const createProfile = async (profileData, token) => {
+const profile = async (profileData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -15,7 +15,7 @@ const createProfile = async (profileData, token) => {
 };
 
 const profileService = {
-  createProfile,
+  profile,
 };
 
 export default profileService;

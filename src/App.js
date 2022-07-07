@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Transactions from "./pages/TransactionsTitles/TransactionsTitles";
 import "./App.scss";
-import SignUp from "./pages/signup/Signup";
+// import SignUp from "./pages/signup/Signup";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login/" element={<Login />} />
-          <Route path="/signup/" element={<SignUp />} />
+          {/* <Route path="/signup/" element={<SignUp />} /> */}
           <Route path="/profile/" element={<Profile />} />
           <Route path="/transactions/" element={<Transactions />} />
         </Routes>

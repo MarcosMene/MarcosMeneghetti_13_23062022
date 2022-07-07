@@ -3,24 +3,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import profileService from "./profileService";
 
+//Get user from localStorage
+const user = JSON.parse(localStorage.getItem("ArgentBank"));
+console.log(user);
+
 const initialState = {
-  accounts: [],
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
-  email: "",
-  password: "",
-  firstName: "",
-  lastName: "",
+  // email: "",
+  // password: "",
+  // firstName: "",
+  // lastName: "",
 };
 
-export const createProfile = createAsyncThunk(
-  "profiles/create",
+export const profile = createAsyncThunk(
+  "profiles/profile",
   async (profileData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await profileService.createProfile(profileData, token);
+      const token = thunkAPI.getState().auth.user.body.token;
+      console.log(token);
+      return await profileService.profile(profileData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -37,19 +42,28 @@ export const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    reset: () => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+      // state.email = "";
+      // state.password = "";
+      // state.firstName = "";
+      // state.lastName = "";
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createProfile.pending, (state) => {
+      .addCase(profile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createProfile.fulfilled, (state, action) => {
+      .addCase(profile.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.profiles.push(action.payload);
       })
-      .addCase(createProfile.rejected, (state, action) => {
+      .addCase(profile.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

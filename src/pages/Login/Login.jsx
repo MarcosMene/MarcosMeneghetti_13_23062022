@@ -32,7 +32,7 @@ const Login = () => {
       navigate("/profile");
     }
     //all info back to initial state of action reset
-    // dispatch(reset());
+    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
@@ -97,14 +97,18 @@ const Login = () => {
               />
             </label>
           </div>
+          <div className="input-remember">
+            <input type="checkbox" id="remember-me" />
+            <label htmlFor="remember-me">Remember me</label>
+          </div>
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
-          <div className="sign-button">
+          {/* <div className="sign-button">
             <span>
               Not a member yet? <Link to="/signup">Sign up</Link>
             </span>
-          </div>
+          </div> */}
         </form>
       </section>
     </main>

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
 //Get user from localStorage
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("ArgentBank"));
 
 const initialState = {
   user: user ? user : null,
@@ -10,10 +10,10 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-  email: "",
-  password: "",
-  firstName: "",
-  lastName: "",
+  // email: "",
+  // password: "",
+  // firstName: "",
+  // lastName: "",
 };
 
 //signup user
@@ -61,6 +61,10 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      // state.email = "";
+      // state.password = "";
+      // state.firstName = "";
+      // state.lastName = "";
     },
   },
 
