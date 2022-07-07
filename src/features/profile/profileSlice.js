@@ -5,7 +5,6 @@ import profileService from "./profileService";
 
 //Get user from localStorage
 const user = JSON.parse(localStorage.getItem("ArgentBank"));
-console.log(user);
 
 const initialState = {
   user: user ? user : null,
@@ -24,7 +23,7 @@ export const profile = createAsyncThunk(
   async (profileData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.body.token;
-      console.log(token);
+
       return await profileService.profile(profileData, token);
     } catch (error) {
       const message =

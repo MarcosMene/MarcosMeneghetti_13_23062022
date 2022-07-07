@@ -7,7 +7,7 @@ const UserHeader = () => {
   const [showForm, setShowForm] = useState("false");
 
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+
   const handleForm = (e) => {
     e.preventDefault();
     setShowForm(!showForm);
