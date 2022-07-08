@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
+import { login, profile, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 const Login = () => {
@@ -19,9 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user, firstName, lastName, isError, isSuccess, isLoading, message } =
+    useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isError) {
@@ -32,8 +31,17 @@ const Login = () => {
       navigate("/profile");
     }
     //all info back to initial state of action reset
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    // dispatch(reset());
+  }, [
+    user,
+    firstName,
+    lastName,
+    isError,
+    isSuccess,
+    message,
+    navigate,
+    dispatch,
+  ]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

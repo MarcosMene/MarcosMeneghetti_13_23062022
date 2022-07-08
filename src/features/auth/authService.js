@@ -28,6 +28,22 @@ const login = async (userData, token) => {
   return response.data;
 };
 
+const profile = async (profileData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(API_URL + "profile", profileData, config);
+  console.log(response);
+  console.log(response.data);
+  console.log(response.data.body);
+  console.log(response.data.body.email);
+
+  return response.data.body;
+};
+
 //logout user
 const logout = () => {
   localStorage.removeItem("ArgentBank");
@@ -35,6 +51,7 @@ const logout = () => {
 
 const authService = {
   signup,
+  profile,
   logout,
   login,
 };

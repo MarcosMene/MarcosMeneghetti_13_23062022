@@ -10,10 +10,10 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-  // email: "",
-  // password: "",
-  // firstName: "",
-  // lastName: "",
+  email: "",
+  password: "",
+  firstName: "tect",
+  lastName: "",
 };
 
 //signup user
@@ -47,6 +47,25 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+export const profile = createAsyncThunk(
+  "profile/profile",
+  async (profileData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.body.token;
+
+      return await authService.profile(profileData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Logout to delete localstore value
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
@@ -61,10 +80,10 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
-      // state.email = "";
-      // state.password = "";
-      // state.firstName = "";
-      // state.lastName = "";
+      state.email = "";
+      state.password = "";
+      state.firstName = "";
+      state.lastName = "";
     },
   },
 
@@ -97,6 +116,20 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload; //payload for message because rejectWithValue(message)
         state.user = null;
+      })
+
+      .addCase(profile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(profile.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        // state.email = action.payload;
+      })
+      .addCase(profile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
 
       .addCase(logout.fulfilled, (state) => {

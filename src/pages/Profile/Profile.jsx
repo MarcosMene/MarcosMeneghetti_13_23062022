@@ -4,24 +4,40 @@ import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profile } from "../../features/profile/profileSlice";
+import { profile } from "../../features/auth/authSlice";
+
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.auth);
-
-  dispatch(profile(user));
+  const { user, email, password, firstName, lastName, message, isError } =
+    useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
     if (!user) {
       navigate("/login");
     }
-  }, [user, navigate]);
 
+    dispatch(profile());
+  }, [
+    user,
+    navigate,
+    isError,
+    message,
+    dispatch,
+    firstName,
+    lastName,
+    email,
+    password,
+  ]);
   return (
     <main className="main bg-dark">
-      <div>{user.body.token}</div>
+      <div>{firstName}</div>
+
       <UserHeader />
       <h2 className="sr-only">Accounts</h2>
 
