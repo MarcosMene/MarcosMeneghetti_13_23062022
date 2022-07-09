@@ -4,14 +4,12 @@ import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profile } from "../../features/auth/authSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, email, password, firstName, lastName, message, isError } =
-    useSelector((state) => state.auth);
+  const { user, message, isError } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isError) {
@@ -22,22 +20,10 @@ const Profile = () => {
       navigate("/login");
     }
 
-    dispatch(profile());
-  }, [
-    user,
-    navigate,
-    isError,
-    message,
-    dispatch,
-    firstName,
-    lastName,
-    email,
-    password,
-  ]);
+    // dispatch(profile());
+  }, [user, navigate, isError, message, dispatch]);
   return (
     <main className="main bg-dark">
-      <div>{firstName}</div>
-
       <UserHeader />
       <h2 className="sr-only">Accounts</h2>
 

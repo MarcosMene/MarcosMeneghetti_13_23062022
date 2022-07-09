@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Transactions from "./pages/TransactionsTitles/TransactionsTitles";
 import "./App.scss";
+import NotFound from "./pages/NotFound/NotFound";
 // import SignUp from "./pages/signup/Signup";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           {/* <Route path="/signup/" element={<SignUp />} /> */}
           <Route path="/profile/" element={<Profile />} />
           <Route path="/transactions/" element={<Transactions />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>

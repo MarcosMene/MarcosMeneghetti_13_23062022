@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import ProfileForm from "../Profileform/ProfileForm";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./UserHeader.scss";
 
+import { profile } from "../../features/auth/authSlice";
+
 const UserHeader = () => {
+  const dispatch = useDispatch();
+
   const [showForm, setShowForm] = useState("false");
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, firstName, lastName, message, isError } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    dispatch(profile());
+  }, [user, isError, message, dispatch, firstName, lastName]);
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -17,8 +31,8 @@ const UserHeader = () => {
       <h1>
         Welcome back
         <br />
-        <span>{user && user.body.firstName}</span>
-        <span>{user && user.body.lastName}</span>
+        <span>{firstName}</span>
+        <span>{lastName}</span>
       </h1>
       {showForm ? (
         <button className="edit-button" onClick={handleForm}>

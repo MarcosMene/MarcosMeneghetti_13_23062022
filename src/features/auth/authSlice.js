@@ -121,10 +121,11 @@ export const authSlice = createSlice({
       .addCase(profile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(profile.fulfilled, (state) => {
+      .addCase(profile.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.email = action.payload;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
       })
       .addCase(profile.rejected, (state, action) => {
         state.isLoading = false;
