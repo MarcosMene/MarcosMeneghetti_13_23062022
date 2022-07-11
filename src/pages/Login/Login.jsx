@@ -25,13 +25,13 @@ const Login = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+      //all info back to initial state of action reset
+      dispatch(reset());
     }
 
     if (isSuccess || user) {
       navigate("/profile");
     }
-    //all info back to initial state of action reset
-    // dispatch(reset());
   }, [
     user,
     firstName,
