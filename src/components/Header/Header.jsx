@@ -11,7 +11,7 @@ import { logout, reset } from "../../features/auth/authSlice";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, firstName } = useSelector((state) => state.auth);
 
   //on logout function
   const onLogout = () => {
@@ -40,7 +40,7 @@ const Header = () => {
         {user ? (
           <>
             <FontAwesomeIcon icon={faCircleUser} />
-            <span>{user.body.firstName}</span>
+            <span>{firstName}</span>
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
             <button className="login-nav-item" onClick={onLogout}>
               SIGN OUT

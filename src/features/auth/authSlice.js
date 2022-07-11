@@ -12,7 +12,7 @@ const initialState = {
   message: "",
   email: "",
   password: "",
-  firstName: "tect",
+  firstName: "",
   lastName: "",
 };
 
