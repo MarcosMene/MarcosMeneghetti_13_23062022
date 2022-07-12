@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./UserHeader.scss";
 
 import { profile, profileUpdate } from "../../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const UserHeader = () => {
   const dispatch = useDispatch();
@@ -22,14 +23,13 @@ const UserHeader = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast.error(message);
     }
 
     dispatch(profile());
   }, [user, isError, message, dispatch, firstName, lastName]);
 
-  const displayForm = (e) => {
-    e.preventDefault();
+  const displayForm = () => {
     setShowForm(!showForm);
   };
 
@@ -38,7 +38,13 @@ const UserHeader = () => {
       firstName: firstNameUpdate,
       lastName: lastNameUpdate,
     };
-    console.log(userDataUpdate, stateToken);
+
+    if (userDataUpdate.firstName === undefined) {
+      userDataUpdate.firstName = "";
+    }
+    if (userDataUpdate.lastName === undefined) {
+      userDataUpdate.lastName = "";
+    }
 
     dispatch(profileUpdate(userDataUpdate, stateToken));
     setShowForm(!showForm);
