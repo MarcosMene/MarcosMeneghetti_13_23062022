@@ -29,7 +29,7 @@ const Login = () => {
       dispatch(reset());
     }
 
-    if (isSuccess || user) {
+    if (isSuccess) {
       navigate("/profile");
     }
   }, [
@@ -112,11 +112,11 @@ const Login = () => {
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
-          {/* <div className="sign-button">
+          <div className="sign-button">
             <span>
               Not a member yet? <Link to="/signup">Sign up</Link>
             </span>
-          </div> */}
+          </div>
         </form>
       </section>
     </main>

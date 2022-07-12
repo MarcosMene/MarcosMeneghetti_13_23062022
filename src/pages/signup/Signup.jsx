@@ -23,21 +23,22 @@ const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const { user, isError, isLoading, message, isSignedUp } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     if (isError) {
       toast.error(message);
+      // navigate("/signup");
     }
 
-    if (isSuccess || user) {
-      navigate("/login");
-    }
+    // if (isSignedUp) {
+    //   navigate("/login");
+    // }
     //all info back to initial state of action reset
     // dispatch(reset()); /// nao sei se vai aqui
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, message, navigate, dispatch, isSignedUp]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -66,7 +67,7 @@ const SignUp = () => {
       };
 
       dispatch(signup(userData));
-      // navigate("/login");
+      navigate("/login");
     }
   };
 
@@ -80,34 +81,6 @@ const SignUp = () => {
         <FontAwesomeIcon icon={faIdBadge} className="fa-lg" />
         <h1>Sign Up</h1>
         <form onSubmit={onSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="username">
-              Username
-              <input
-                autoComplete="off"
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                placeholder="Enter your email"
-                onChange={onChange}
-              />
-            </label>
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">
-              Password
-              <input
-                autoComplete="off"
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                placeholder="Enter password"
-                onChange={onChange}
-              />
-            </label>
-          </div>
           <div className="input-wrapper">
             <label htmlFor="firstname">
               First name
@@ -132,6 +105,34 @@ const SignUp = () => {
                 name="lastName"
                 value={lastName}
                 placeholder="Enter last name"
+                onChange={onChange}
+              />
+            </label>
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="username">
+              Email
+              <input
+                autoComplete="off"
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                placeholder="Enter your email"
+                onChange={onChange}
+              />
+            </label>
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="password">
+              Password
+              <input
+                autoComplete="off"
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                placeholder="Enter password"
                 onChange={onChange}
               />
             </label>

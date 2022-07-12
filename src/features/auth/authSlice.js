@@ -9,6 +9,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
+  isSignedUp: false,
   message: "",
   email: "",
   password: "",
@@ -113,13 +114,15 @@ export const authSlice = createSlice({
       })
       .addCase(signup.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = false;
         state.user = action.payload; //payload for authService.signup(user) signup function service
+        state.isSignedUp = true;
       })
       .addCase(signup.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload; //payload for message because rejectWithValue(message)
+        state.isSignedUp = false;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
