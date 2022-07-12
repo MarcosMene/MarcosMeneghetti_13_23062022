@@ -79,7 +79,7 @@ const Login = () => {
         <form onSubmit={onSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">
-              Username
+              Email
               <input
                 autoComplete="off"
                 type="email"
