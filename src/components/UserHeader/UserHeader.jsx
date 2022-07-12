@@ -15,7 +15,7 @@ const UserHeader = () => {
   const stateFirstName = useSelector((state) => state.auth.firstName);
   const stateLastName = useSelector((state) => state.auth.lastName);
   const stateToken = useSelector((state) => state.auth.user.body.token);
-  console.log(stateToken);
+
   const [firstNameUpdate, setFirstNameUpdate] = useState();
   const [lastNameUpdate, setLastNameUpdate] = useState();
   const [showForm, setShowForm] = useState("false");
@@ -35,9 +35,10 @@ const UserHeader = () => {
 
   const editUser = () => {
     const userDataUpdate = {
-      firstNameUpdate,
-      lastNameUpdate,
+      firstName: firstNameUpdate,
+      lastName: lastNameUpdate,
     };
+    console.log(userDataUpdate, stateToken);
 
     dispatch(profileUpdate(userDataUpdate, stateToken));
     setShowForm(!showForm);
