@@ -76,7 +76,7 @@ const UserHeader = () => {
                     type="text"
                     id="lastName"
                     name="lastName"
-                    placeholder="Stark"
+                    placeholder={lastName}
                     onChange={(e) => setLastNameUpdate(e.target.value)}
                   />
                 </label>
