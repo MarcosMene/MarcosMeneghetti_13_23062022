@@ -33,7 +33,8 @@ const UserHeader = () => {
     setShowForm(!showForm);
   };
 
-  const editUser = () => {
+  const editUser = (e) => {
+    e.preventDefault();
     const userDataUpdate = {
       firstName: firstNameUpdate,
       lastName: lastNameUpdate,
@@ -93,7 +94,7 @@ const UserHeader = () => {
               <button
                 className="button-form"
                 type="submit"
-                onClick={() => editUser()}
+                onClick={(e) => editUser(e)}
               >
                 save
               </button>
