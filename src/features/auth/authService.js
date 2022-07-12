@@ -48,7 +48,7 @@ const profileUpdate = async (profileUpdateData, token) => {
   };
 
   const response = await axios.put(
-    API_URL + "profileUpdate",
+    API_URL + "profile",
     profileUpdateData,
     config
   );
