@@ -40,6 +40,22 @@ const profile = async (profileData, token) => {
   return response.data.body;
 };
 
+const profileUpdate = async (profileUpdateData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    API_URL + "profileUpdate",
+    profileUpdateData,
+    config
+  );
+
+  return response.data.body;
+};
+
 //logout user
 const logout = () => {
   localStorage.removeItem("ArgentBank");
@@ -48,6 +64,7 @@ const logout = () => {
 const authService = {
   signup,
   profile,
+  profileUpdate,
   logout,
   login,
 };

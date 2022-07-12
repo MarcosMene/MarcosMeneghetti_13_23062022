@@ -3,16 +3,22 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./UserHeader.scss";
 
-import { profile } from "../../features/auth/authSlice";
+import { profile, profileUpdate } from "../../features/auth/authSlice";
 
 const UserHeader = () => {
   const dispatch = useDispatch();
 
-  const [showForm, setShowForm] = useState("false");
-
   const { user, firstName, lastName, message, isError } = useSelector(
     (state) => state.auth
   );
+
+  const stateFirstName = useSelector((state) => state.auth.firstName);
+  const stateLastName = useSelector((state) => state.auth.lastName);
+  const stateToken = useSelector((state) => state.auth.user.body.token);
+  console.log(stateToken);
+  const [firstNameUpdate, setFirstNameUpdate] = useState();
+  const [lastNameUpdate, setLastNameUpdate] = useState();
+  const [showForm, setShowForm] = useState("false");
 
   useEffect(() => {
     if (isError) {
@@ -22,46 +28,78 @@ const UserHeader = () => {
     dispatch(profile());
   }, [user, isError, message, dispatch, firstName, lastName]);
 
-  const handleForm = (e) => {
+  const displayForm = (e) => {
     e.preventDefault();
     setShowForm(!showForm);
   };
-  return (
-    <div className="header">
-      <h1>
-        Welcome back
-        <br />
-        <span>{firstName}</span>
-        <span>{lastName}</span>
-      </h1>
-      {showForm ? (
-        <button className="edit-button" onClick={handleForm}>
-          Edit Name
-        </button>
-      ) : (
-        // <section className="form-change-name">
-        <form>
-          <div className="inputs-form">
-            <div className="input-wrapper">
-              <input type="text" id="firstname" placeholder="Tony" />
+
+  const editUser = () => {
+    const userDataUpdate = {
+      firstNameUpdate,
+      lastNameUpdate,
+    };
+
+    dispatch(profileUpdate(userDataUpdate, stateToken));
+    setShowForm(!showForm);
+  };
+
+  if (stateToken) {
+    return (
+      <div className="header">
+        <h1>
+          Welcome back
+          <br />
+          <span>{stateFirstName + " " + stateLastName}</span>
+        </h1>
+        {showForm ? (
+          <button className="edit-button" onClick={displayForm}>
+            Edit Name
+          </button>
+        ) : (
+          // <section className="form-change-name">
+          <form>
+            <div className="inputs-form">
+              <div className="input-wrapper">
+                <label htmlFor="firstName">
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder={firstName}
+                    onChange={(e) => setFirstNameUpdate(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="input-wrapper">
+                <label htmlFor="lastName">
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Stark"
+                    onChange={(e) => setLastNameUpdate(e.target.value)}
+                  />
+                </label>
+              </div>
             </div>
-            <div className="input-wrapper">
-              <input type="text" id="lastname" placeholder="Stark" />
+            <div className="form-buttons">
+              <button
+                className="button-form"
+                type="submit"
+                onClick={() => editUser()}
+              >
+                save
+              </button>
+              <button className="button-form" onClick={displayForm}>
+                cancel
+              </button>
             </div>
-          </div>
-          <div className="form-buttons">
-            <button className="button-form" type="submit" onClick={handleForm}>
-              save
-            </button>
-            <button className="button-form" onClick={handleForm}>
-              cancel
-            </button>
-          </div>
-        </form>
-        // </section>
-      )}
-    </div>
-  );
+          </form>
+          // </section>
+        )}
+      </div>
+    );
+  }
 };
 
 export default UserHeader;
