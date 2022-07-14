@@ -33,9 +33,10 @@ const SignUp = () => {
       // navigate("/signup");
     }
 
-    // if (isSignedUp) {
-    //   navigate("/login");
-    // }
+    if (isSignedUp) {
+      navigate("/login");
+    }
+
     //all info back to initial state of action reset
     // dispatch(reset()); /// nao sei se vai aqui
   }, [user, isError, message, navigate, dispatch, isSignedUp]);
@@ -67,7 +68,7 @@ const SignUp = () => {
       };
 
       dispatch(signup(userData));
-      navigate("/login");
+      // navigate("/login");
     }
   };
 

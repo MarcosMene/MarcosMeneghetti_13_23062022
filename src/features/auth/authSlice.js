@@ -10,6 +10,8 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   isSignedUp: false,
+  isEditMode: false,
+  isBackground: false,
   message: "",
   email: "",
   password: "",
@@ -105,6 +107,18 @@ export const authSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
     },
+    userDataEdited: (state) => {
+      state.isEditMode = true;
+    },
+    userDataCancelled: (state) => {
+      state.isEditMode = false;
+    },
+    userBackgroundBlack: (state) => {
+      state.isBackground = false;
+    },
+    userBackgroundBlue: (state) => {
+      state.isBackground = true;
+    },
   },
 
   extraReducers: (builder) => {
@@ -117,6 +131,8 @@ export const authSlice = createSlice({
         state.isSuccess = false;
         state.user = action.payload; //payload for authService.signup(user) signup function service
         state.isSignedUp = true;
+        state.isError = false;
+        state.message = "";
       })
       .addCase(signup.rejected, (state, action) => {
         state.isLoading = false;
@@ -132,6 +148,8 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload; //payload for authService.signup(user) signup function service
+        state.isError = false;
+        state.message = "";
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -149,6 +167,8 @@ export const authSlice = createSlice({
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
         state.email = action.payload.email;
+        state.isError = false;
+        state.message = "";
       })
       .addCase(profile.rejected, (state, action) => {
         state.isLoading = false;
@@ -164,6 +184,8 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
+        state.isError = false;
+        state.message = "";
       })
       .addCase(profileUpdate.rejected, (state, action) => {
         state.isLoading = false;
@@ -177,5 +199,11 @@ export const authSlice = createSlice({
   },
 });
 
-export const { reset } = authSlice.actions;
+export const {
+  reset,
+  userDataEdited,
+  userDataCancelled,
+  userBackgroundBlack,
+  userBackgroundBlue,
+} = authSlice.actions;
 export default authSlice.reducer;

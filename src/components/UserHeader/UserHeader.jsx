@@ -3,15 +3,29 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./UserHeader.scss";
 
-import { profile, profileUpdate } from "../../features/auth/authSlice";
+import {
+  profile,
+  profileUpdate,
+  userDataEdited,
+  userDataCancelled,
+  userEditBackground,
+  userBackgroundBlack,
+  userBackgroundBlue,
+} from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
 
 const UserHeader = () => {
   const dispatch = useDispatch();
 
-  const { user, firstName, lastName, message, isError } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    user,
+    firstName,
+    lastName,
+    message,
+    isError,
+    isEditMode,
+    isBackground,
+  } = useSelector((state) => state.auth);
 
   const stateFirstName = useSelector((state) => state.auth.firstName);
   const stateLastName = useSelector((state) => state.auth.lastName);
@@ -27,34 +41,58 @@ const UserHeader = () => {
     }
 
     dispatch(profile());
-  }, [user, isError, message, dispatch, firstName, lastName]);
+  }, [
+    user,
+    isError,
+    message,
+    dispatch,
+    firstName,
+    lastName,
+    isEditMode,
+    isBackground,
+  ]);
 
   const displayForm = () => {
     setShowForm(!showForm);
+    dispatch(userBackgroundBlue());
+    dispatch(userDataEdited());
+  };
+  const hideForm = () => {
+    setShowForm(!showForm);
+    dispatch(userBackgroundBlack());
   };
 
   const editUser = (e) => {
     e.preventDefault();
+
     const userDataUpdate = {
       firstName: firstNameUpdate,
       lastName: lastNameUpdate,
     };
-
-    if (userDataUpdate.firstName === undefined) {
-      userDataUpdate.firstName = "";
+    console.log(userDataUpdate);
+    console.log(userDataUpdate.firstName);
+    console.log(userDataUpdate.lastName);
+    if (
+      (userDataUpdate.firstName === undefined ||
+        userDataUpdate.firstName === null) &&
+      (userDataUpdate.lastName === undefined ||
+        userDataUpdate.lastName === null)
+    ) {
+      toast.error("You must fill first name and last name");
+    } else {
+      dispatch(profileUpdate(userDataUpdate, stateToken));
+      setShowForm(!showForm);
+      dispatch(userBackgroundBlack());
+      dispatch(userDataCancelled());
     }
-    if (userDataUpdate.lastName === undefined) {
-      userDataUpdate.lastName = "";
-    }
-
-    dispatch(profileUpdate(userDataUpdate, stateToken));
-    setShowForm(!showForm);
   };
 
   if (stateToken) {
     return (
       <div className="header">
-        <h1>
+        <h1
+          className={isBackground ? "header-title black" : "header-title white"}
+        >
           Welcome back
           <br />
           <span>{stateFirstName + " " + stateLastName}</span>
@@ -98,7 +136,7 @@ const UserHeader = () => {
               >
                 save
               </button>
-              <button className="button-form" onClick={displayForm}>
+              <button className="button-form" onClick={hideForm}>
                 cancel
               </button>
             </div>

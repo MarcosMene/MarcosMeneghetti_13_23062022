@@ -50,7 +50,6 @@ const Header = () => {
           <>
             <FontAwesomeIcon icon={faCircleUser} />
             <button
-              to="/login"
               className="login-nav-item sign-in-logo"
               onClick={navigateLogin}
             >

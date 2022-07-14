@@ -43,12 +43,21 @@
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 1rem;
-    border-color: #00bc77;
-    background-color: #00bc77;
+
     color: #fff;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+
+    &.green {
+        border-color: #00bc77;
+        background-color: #00bc77;
+    }
+
+    &.blue {
+        border-color: rgb(100, 88, 245);
+        background-color: rgb(100, 88, 245);
+    }
 }
 
 @media (min-width: 720px) {

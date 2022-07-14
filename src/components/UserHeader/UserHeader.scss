@@ -1,6 +1,15 @@
 .header {
-    color: #fff;
     margin-bottom: 2rem;
+}
+
+.header-title {
+    &.white {
+        color: #fff;
+    }
+
+    &.black {
+        color: #000;
+    }
 }
 
 .edit-button {
@@ -25,8 +34,13 @@
     .input-wrapper {
         width: 300px;
         margin: 10px;
-    }
+        position: relative;
+        padding-left: 10px;
 
+        input {
+            padding-left: 15px;
+        }
+    }
 }
 
 .header span {
@@ -42,6 +56,8 @@
     border-color: #b3b3f0;
     background-color: #fff;
     color: rgb(102, 90, 245);
+    border: 1px solid rgb(102, 90, 245);
+    border-radius: 3px;
 }
 
 @media (min-width: 720px) {

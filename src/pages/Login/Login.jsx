@@ -1,14 +1,57 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleUser,
+  faInfoCircle,
+  faCheck,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import "./Login.scss";
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, profile, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
+const USER_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const PWD_REGEX = /^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/;
+
 const Login = () => {
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const [userEmail, setUserEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [userFocus, setUserFocus] = useState(false);
+
+  const [userPassword, setUserPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const result = USER_REGEX.test(userEmail);
+    console.log(result);
+    console.log(userEmail);
+    setValidEmail(result);
+  }, [userEmail]);
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(userPassword);
+    console.log(result);
+    console.log(userPassword);
+    setValidPassword(result);
+  }, [userPassword]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [userEmail, userPassword]);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,8 +62,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, firstName, lastName, isError, isSuccess, isLoading, message } =
-    useSelector((state) => state.auth);
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     if (isError) {
@@ -29,42 +73,48 @@ const Login = () => {
       dispatch(reset());
     }
 
-    if (isSuccess) {
+    if (isSuccess || user) {
       navigate("/profile");
     }
-  }, [
-    user,
-    firstName,
-    lastName,
-    isError,
-    isSuccess,
-    message,
-    navigate,
-    dispatch,
-  ]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState, //we want the other fields
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState, //we want the other fields
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email.length === 0) {
-      toast.error("You need enter a valable email");
-    } else if (password.length < 3) {
-      toast.error("Passwords must be at least 4 characters");
-    } else {
-      const userData = {
-        email,
-        password,
-      };
+    const v1 = USER_REGEX.test(userEmail);
+    const v2 = PWD_REGEX.test(userPassword);
 
-      dispatch(login(userData));
+    if (!v1 || !v2) {
+      setErrMsg("Invalid Entry");
+      return;
     }
+
+    const userData = {
+      email: userEmail,
+      password: userPassword,
+    };
+
+    dispatch(login(userData));
+
+    // if (email.length === 0) {
+    //   toast.error("You need enter a valable email");
+    // } else if (password.length < 3) {
+    //   toast.error("Passwords must be at least 4 characters");
+    // } else {
+    //   const userData = {
+    //     email,
+    //     password,
+    //   };
+
+    //   dispatch(login(userData));
+    // }
   };
 
   if (isLoading) {
@@ -76,47 +126,99 @@ const Login = () => {
       <section className="sign-in-content">
         <FontAwesomeIcon icon={faCircleUser} className="fa-lg" />
         <h1>Sign In</h1>
-        <form onSubmit={onSubmit}>
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "hide"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+        <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">
               Email
-              <input
-                autoComplete="off"
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                placeholder="Enter your email"
-                onChange={onChange}
-              />
+              {/* <span className={validEmail ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span> */}
+              <span className={validEmail || !userEmail ? "hide" : "invalid"}>
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
             </label>
+            <input
+              autoComplete="off"
+              type="email"
+              id="email"
+              // name="email"
+              ref={userRef}
+              placeholder="Enter your email"
+              onChange={(e) => setUserEmail(e.target.value)}
+              required
+              aria-invalid={validEmail ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setUserFocus(true)}
+              onBlur={() => setUserFocus(false)}
+            />
+            <p
+              id="uidnote"
+              className={
+                userFocus && userEmail && !validEmail
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              Must be a valid email.
+            </p>
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">
               Password
-              <input
-                autoComplete="off"
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                placeholder="Enter password"
-                onChange={onChange}
-              />
+              {/* <span className={validPassword ? "valid" : "hide"}>
+                <FontAwesomeIcon icon={faCheck} />
+              </span> */}
+              <span
+                className={validPassword || !userPassword ? "hide" : "invalid"}
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </span>
             </label>
+            <input
+              autoComplete="off"
+              type="password"
+              id="password"
+              // name="password"
+              placeholder="Enter password"
+              onChange={(e) => setUserPassword(e.target.value)}
+              required
+              aria-invalid={validPassword ? "false" : "true"}
+              aria-describedby="pwdnote"
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
+            />
+            <p
+              id="pwdnote"
+              className={
+                passwordFocus && !validPassword ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Must include letters and numbers.
+            </p>
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button type="submit" className="sign-in-button">
+          <button
+            disabled={!validEmail || !validPassword ? true : false}
+            className="sign-in-button"
+          >
             Sign In
           </button>
-          <div className="sign-button">
+          {/* <div className="sign-button">
             <span>
               Not a member yet? <Link to="/signup">Sign up</Link>
             </span>
-          </div>
+          </div> */}
         </form>
       </section>
     </main>

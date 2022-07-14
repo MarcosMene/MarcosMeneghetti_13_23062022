@@ -4,12 +4,15 @@ import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import { userDataEdited } from "../../features/auth/authSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, message, isError } = useSelector((state) => state.auth);
+  const { user, message, isError, isBackground } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     if (isError) {
@@ -23,7 +26,7 @@ const Profile = () => {
     // dispatch(profile());
   }, [user, navigate, isError, message, dispatch]);
   return (
-    <main className="main bg-dark">
+    <main className={isBackground ? "main bg-light" : "main bg-dark"}>
       <UserHeader />
       <h2 className="sr-only">Accounts</h2>
 
