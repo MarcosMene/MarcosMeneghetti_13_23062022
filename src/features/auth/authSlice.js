@@ -17,6 +17,8 @@ const initialState = {
   password: "",
   firstName: "",
   lastName: "",
+  // id: "",
+  isRemembered: false,
 };
 
 //signup user
@@ -102,10 +104,12 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      // state.id = "";
       state.email = "";
       state.password = "";
       state.firstName = "";
       state.lastName = "";
+      state.isRemembered = false;
     },
     userDataEdited: (state) => {
       state.isEditMode = true;
@@ -118,6 +122,9 @@ export const authSlice = createSlice({
     },
     userBackgroundBlue: (state) => {
       state.isBackground = true;
+    },
+    userRememberMe: (state) => {
+      state.isRemembered = true;
     },
   },
 
@@ -205,5 +212,6 @@ export const {
   userDataCancelled,
   userBackgroundBlack,
   userBackgroundBlue,
+  userRememberMe,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -8,9 +8,9 @@ import {
   profileUpdate,
   userDataEdited,
   userDataCancelled,
-  userEditBackground,
   userBackgroundBlack,
   userBackgroundBlue,
+  reset,
 } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
 
@@ -38,6 +38,7 @@ const UserHeader = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+      dispatch(reset());
     }
 
     dispatch(profile());
@@ -66,9 +67,10 @@ const UserHeader = () => {
     e.preventDefault();
 
     const userDataUpdate = {
-      firstName: firstNameUpdate,
-      lastName: lastNameUpdate,
+      firstName: firstNameUpdate ? firstNameUpdate : firstName,
+      lastName: lastNameUpdate ? lastNameUpdate : lastName,
     };
+    console.log(firstName);
     console.log(userDataUpdate);
     console.log(userDataUpdate.firstName);
     console.log(userDataUpdate.lastName);

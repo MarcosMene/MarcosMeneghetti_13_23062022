@@ -17,6 +17,13 @@
     border-color: #00bc77;
     background-color: #00bc77;
     color: #fff;
+
+
+    &:disabled,
+    &[disabled] {
+        border-color: #8ba099;
+        background-color: #8ba099;
+    }
 }
 
 

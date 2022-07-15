@@ -2,21 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleUser,
   faInfoCircle,
-  faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Login.scss";
 import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, profile, reset } from "../../features/auth/authSlice";
+import { login, userRememberMe, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 const USER_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/;
 
 const Login = () => {
+  const rememberMeLogin = JSON.parse(localStorage.getItem("rememberMe"));
+
   const userRef = useRef();
   const errRef = useRef();
 
@@ -30,21 +31,21 @@ const Login = () => {
 
   const [errMsg, setErrMsg] = useState("");
 
+  const [checked, setChecked] = useState(false);
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
 
   useEffect(() => {
     const result = USER_REGEX.test(userEmail);
-    console.log(result);
-    console.log(userEmail);
+
     setValidEmail(result);
   }, [userEmail]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(userPassword);
-    console.log(result);
-    console.log(userPassword);
+
     setValidPassword(result);
   }, [userPassword]);
 
@@ -52,12 +53,12 @@ const Login = () => {
     setErrMsg("");
   }, [userEmail, userPassword]);
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
-  const { email, password } = formData;
+  // const { email, password } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,14 +70,30 @@ const Login = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+
+      if (!setValidPassword) {
+        toast.error(message);
+      }
+      if (!setValidEmail) {
+        toast.error(message);
+      }
+
       //all info back to initial state of action reset
       dispatch(reset());
+    } else if (isSuccess) {
+      localStorage.removeItem("rememberMe");
+      navigate("/profile");
+      if (checked) {
+        localStorage.removeItem("rememberMe");
+        dispatch(userRememberMe());
+        navigate("/profile");
+      }
     }
 
-    if (isSuccess || user) {
-      navigate("/profile");
-    }
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    // if (isSuccess || user) {
+    //   navigate("/profile");
+    // }
+  }, [user, isError, isSuccess, message, navigate, dispatch, checked]);
 
   // const onChange = (e) => {
   //   setFormData((prevState) => ({
@@ -87,12 +104,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("***********");
+    console.log("***********");
+    console.log("***********");
     const v1 = USER_REGEX.test(userEmail);
     const v2 = PWD_REGEX.test(userPassword);
+    console.log(v1, v2);
 
     if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
+      toast.error("You must fill email and password");
       return;
     }
 
@@ -100,6 +120,7 @@ const Login = () => {
       email: userEmail,
       password: userPassword,
     };
+    console.log(userData);
 
     dispatch(login(userData));
 
@@ -117,9 +138,9 @@ const Login = () => {
     // }
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
   return (
     <main className="main bg-dark">
@@ -148,10 +169,11 @@ const Login = () => {
               autoComplete="off"
               type="email"
               id="email"
-              // name="email"
               ref={userRef}
               placeholder="Enter your email"
-              onChange={(e) => setUserEmail(e.target.value)}
+              onChange={(e) =>
+                rememberMeLogin ? user.email : setUserEmail(e.target.value)
+              }
               required
               aria-invalid={validEmail ? "false" : "true"}
               aria-describedby="uidnote"

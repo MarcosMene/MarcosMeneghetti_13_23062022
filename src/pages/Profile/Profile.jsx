@@ -25,28 +25,30 @@ const Profile = () => {
 
     // dispatch(profile());
   }, [user, navigate, isError, message, dispatch]);
-  return (
-    <main className={isBackground ? "main bg-light" : "main bg-dark"}>
-      <UserHeader />
-      <h2 className="sr-only">Accounts</h2>
+  if (user) {
+    return (
+      <main className={isBackground ? "main bg-light" : "main bg-dark"}>
+        <UserHeader />
+        <h2 className="sr-only">Accounts</h2>
 
-      <ProfileAccount
-        title="Argent Bank Checking (x8349)"
-        amount="$2,082.79"
-        amountDescription="Available Balance"
-      />
-      <ProfileAccount
-        title="Argent Bank Savings (x6712)"
-        amount="$10,928.42"
-        amountDescription="Available Balance"
-      />
-      <ProfileAccount
-        title="Argent Bank Credit Card (x8349)"
-        amount="$184.30"
-        amountDescription="Current Balance"
-      />
-    </main>
-  );
+        <ProfileAccount
+          title="Argent Bank Checking (x8349)"
+          amount="$2,082.79"
+          amountDescription="Available Balance"
+        />
+        <ProfileAccount
+          title="Argent Bank Savings (x6712)"
+          amount="$10,928.42"
+          amountDescription="Available Balance"
+        />
+        <ProfileAccount
+          title="Argent Bank Credit Card (x8349)"
+          amount="$184.30"
+          amountDescription="Current Balance"
+        />
+      </main>
+    );
+  }
 };
 
 export default Profile;
