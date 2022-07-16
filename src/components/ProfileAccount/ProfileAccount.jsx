@@ -8,8 +8,14 @@ import {
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 
-const ProfileAccount = ({ title, amount, amountDescription }) => {
+const ProfileAccount = ({
+  title,
+  amount,
+  amountDescription,
+  singleAccountId,
+}) => {
   const { isEditMode, isBackground } = useSelector((state) => state.auth);
+  const accountId = singleAccountId;
 
   return (
     <section className="account">
@@ -20,7 +26,7 @@ const ProfileAccount = ({ title, amount, amountDescription }) => {
       </div>
       <div className="account-content-wrapper cta">
         <Link
-          to="/transactions"
+          to={`/transactions/${accountId}`}
           className={
             isBackground
               ? "transaction-button blue"

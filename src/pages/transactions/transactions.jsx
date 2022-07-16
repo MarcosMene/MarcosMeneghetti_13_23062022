@@ -1,13 +1,21 @@
 import TransactionsAccount from "../../components/TransactionHeader/TransactionHeader";
 import Accordeons from "../../components/Accordeons/Accordeons";
 import { infoTransactions } from "../../mock/infoTransactions";
+import { infoProfile } from "../../mock/infoProfile";
 import "./transactions.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Transactions = () => {
   const navigate = useNavigate();
+  let { accountId } = useParams();
+
+  const Single_Account_Mock = infoProfile.find(
+    (account) => account.id === parseInt(accountId)
+  );
 
   const { user } = useSelector((state) => state.auth);
 
@@ -20,10 +28,19 @@ const Transactions = () => {
   if (user) {
     return (
       <main>
+        <button className="back-button" onClick={() => navigate(-1)}>
+          <span className="back-icon">
+            <FontAwesomeIcon icon={faArrowLeftLong} />
+          </span>
+
+          <span className="back-text">Back</span>
+        </button>
+
         <TransactionsAccount
-          title="Argent Bank Checking (x8349)"
-          amount="$2,082.79"
-          amountDescription="Available Balance"
+          key={Single_Account_Mock.id}
+          title={Single_Account_Mock.title}
+          amount={Single_Account_Mock.amount}
+          amountDescription={Single_Account_Mock.amountDescription}
         />
         <section className="main bg-light">
           <h2 className="sr-only">transactions list</h2>

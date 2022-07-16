@@ -21,7 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/transactions/:accountId" element={<Transactions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

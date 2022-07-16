@@ -14,7 +14,7 @@ const initialState = {
   isBackground: false,
   message: "",
   email: "",
-  password: "",
+  // password: "",
   firstName: "",
   lastName: "",
   // id: "",
@@ -106,7 +106,7 @@ export const authSlice = createSlice({
       state.message = "";
       // state.id = "";
       state.email = "";
-      state.password = "";
+      // state.password = "";
       state.firstName = "";
       state.lastName = "";
       state.isRemembered = false;

@@ -70,10 +70,7 @@ const UserHeader = () => {
       firstName: firstNameUpdate ? firstNameUpdate : firstName,
       lastName: lastNameUpdate ? lastNameUpdate : lastName,
     };
-    console.log(firstName);
-    console.log(userDataUpdate);
-    console.log(userDataUpdate.firstName);
-    console.log(userDataUpdate.lastName);
+
     if (
       (userDataUpdate.firstName === undefined ||
         userDataUpdate.firstName === null) &&

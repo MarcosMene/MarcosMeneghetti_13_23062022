@@ -1,3 +1,26 @@
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    width: 68px;
+    background: transparent;
+    border: none;
+
+    &:hover .back-text,
+    &:hover .back-icon {
+        color: #00B46B;
+    }
+
+    .back-icon {
+        margin-right: 10px;
+    }
+}
+
+
 .transactions {
     padding-top: 5rem;
     background-color: #e0e6ed;

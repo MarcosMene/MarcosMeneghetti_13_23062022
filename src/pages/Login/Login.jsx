@@ -104,12 +104,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("***********");
-    console.log("***********");
-    console.log("***********");
+
     const v1 = USER_REGEX.test(userEmail);
     const v2 = PWD_REGEX.test(userPassword);
-    console.log(v1, v2);
 
     if (!v1 || !v2) {
       toast.error("You must fill email and password");
@@ -120,7 +117,6 @@ const Login = () => {
       email: userEmail,
       password: userPassword,
     };
-    console.log(userData);
 
     dispatch(login(userData));
 
