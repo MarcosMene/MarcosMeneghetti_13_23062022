@@ -33,7 +33,7 @@ const UserHeader = () => {
 
   const [firstNameUpdate, setFirstNameUpdate] = useState();
   const [lastNameUpdate, setLastNameUpdate] = useState();
-  const [showForm, setShowForm] = useState("false");
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     if (isError) {
@@ -54,12 +54,12 @@ const UserHeader = () => {
   ]);
 
   const displayForm = () => {
-    setShowForm(!showForm);
+    setShowForm(true);
     dispatch(userBackgroundBlue());
     dispatch(userDataEdited());
   };
   const hideForm = () => {
-    setShowForm(!showForm);
+    setShowForm(false);
     dispatch(userBackgroundBlack());
   };
 
@@ -80,7 +80,7 @@ const UserHeader = () => {
       toast.error("You must fill first name and last name");
     } else {
       dispatch(profileUpdate(userDataUpdate, stateToken));
-      setShowForm(!showForm);
+      setShowForm(false);
       dispatch(userBackgroundBlack());
       dispatch(userDataCancelled());
     }
@@ -97,10 +97,6 @@ const UserHeader = () => {
           <span>{stateFirstName + " " + stateLastName}</span>
         </h1>
         {showForm ? (
-          <button className="edit-button" onClick={displayForm}>
-            Edit Name
-          </button>
-        ) : (
           // <section className="form-change-name">
           <form>
             <div className="inputs-form">
@@ -140,7 +136,11 @@ const UserHeader = () => {
               </button>
             </div>
           </form>
+        ) : (
           // </section>
+          <button className="edit-button" onClick={displayForm}>
+            Edit Name
+          </button>
         )}
       </div>
     );
