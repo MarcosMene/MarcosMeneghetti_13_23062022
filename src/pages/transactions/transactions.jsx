@@ -7,28 +7,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { userBackgroundBlack } from "../../features/auth/authSlice";
 
 const Transactions = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   let { accountId } = useParams();
 
   const Single_Account_Mock = infoProfile.find(
     (account) => account.id === parseInt(accountId)
   );
 
-  const { user } = useSelector((state) => state.auth);
+  const { user, isBackground } = useSelector((state) => state.auth);
+
+  const backButton = () => {
+    navigate(-1);
+    if (isBackground) {
+      dispatch(userBackgroundBlack());
+    }
+  };
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [user, isBackground, navigate]);
 
   if (user) {
     return (
       <main>
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={backButton}>
           <span className="back-icon">
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </span>
