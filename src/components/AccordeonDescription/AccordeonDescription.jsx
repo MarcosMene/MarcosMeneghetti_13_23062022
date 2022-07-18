@@ -37,7 +37,7 @@ const TransactionDescription = () => {
                 onClick={handleFormCategory}
                 className="sign-in-button short"
               >
-                Edit
+                Save
               </button>
             </form>
           </div>
