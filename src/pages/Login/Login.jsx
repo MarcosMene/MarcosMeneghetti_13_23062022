@@ -120,23 +120,10 @@ const Login = () => {
 
     dispatch(login(userData));
 
-    // if (email.length === 0) {
-    //   toast.error("You need enter a valable email");
-    // } else if (password.length < 3) {
-    //   toast.error("Passwords must be at least 4 characters");
-    // } else {
-    //   const userData = {
-    //     email,
-    //     password,
-    //   };
-
-    //   dispatch(login(userData));
-    // }
+    if (isLoading) {
+      return <Spinner />;
+    }
   };
-
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
 
   return (
     <main className="main bg-dark">

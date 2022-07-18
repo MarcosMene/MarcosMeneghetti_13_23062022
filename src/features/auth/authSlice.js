@@ -157,7 +157,7 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.user = action.payload; //payload for authService.signup(user) signup function service
         state.isError = false;
-        state.message = "";
+        state.message = action.payload;
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
