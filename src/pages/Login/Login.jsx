@@ -70,6 +70,7 @@ const Login = () => {
   useEffect(() => {
     if (isError) {
       toast.error(message);
+      dispatch(reset());
 
       if (!setValidPassword) {
         toast.error(message);
@@ -78,8 +79,8 @@ const Login = () => {
         toast.error(message);
       }
 
-      //all info back to initial state of action reset
-      dispatch(reset());
+      // //all info back to initial state of action reset
+      // dispatch(reset());
     } else if (isSuccess) {
       localStorage.removeItem("rememberMe");
       navigate("/profile");
@@ -108,22 +109,34 @@ const Login = () => {
     const v1 = USER_REGEX.test(userEmail);
     const v2 = PWD_REGEX.test(userPassword);
 
-    if (!v1 || !v2) {
-      toast.error("You must fill email and password");
-      return;
-    }
-
     const userData = {
       email: userEmail,
       password: userPassword,
     };
 
-    dispatch(login(userData));
-
-    if (isLoading) {
-      return <Spinner />;
+    if (!v1 || !v2) {
+      toast.error("You must fill email and password");
+    } else {
+      dispatch(login(userData));
     }
+
+    // if (email.length === 0) {
+    //   toast.error("You need enter a valable email");
+    // } else if (password.length < 3) {
+    //   toast.error("Passwords must be at least 4 characters");
+    // } else {
+    //   const userData = {
+    //     email,
+    //     password,
+    //   };
+
+    //   dispatch(login(userData));
+    // }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <main className="main bg-dark">
@@ -154,14 +167,13 @@ const Login = () => {
               id="email"
               ref={userRef}
               placeholder="Enter your email"
-              onChange={(e) =>
-                rememberMeLogin ? user.email : setUserEmail(e.target.value)
-              }
+              onChange={(e) => setUserEmail(e.target.value)}
               required
               aria-invalid={validEmail ? "false" : "true"}
               aria-describedby="uidnote"
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
+              value={userEmail}
             />
             <p
               id="uidnote"
@@ -198,6 +210,7 @@ const Login = () => {
               aria-describedby="pwdnote"
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
+              value={userPassword}
             />
             <p
               id="pwdnote"
