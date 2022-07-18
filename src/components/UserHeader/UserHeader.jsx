@@ -131,14 +131,14 @@ const UserHeader = () => {
               >
                 save
               </button>
-              <button className="button-form" onClick={hideForm}>
+              <button type="button" className="button-form" onClick={hideForm}>
                 cancel
               </button>
             </div>
           </form>
         ) : (
           // </section>
-          <button className="edit-button" onClick={displayForm}>
+          <button type="submit" className="edit-button" onClick={displayForm}>
             Edit Name
           </button>
         )}

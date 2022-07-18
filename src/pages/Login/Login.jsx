@@ -227,6 +227,7 @@ const Login = () => {
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button
+            type="submit"
             disabled={!validEmail || !validPassword ? true : false}
             className="sign-in-button"
           >
