@@ -12,13 +12,13 @@ const initialState = {
   isSignedUp: false,
   isEditMode: false,
   isBackground: false,
+  isRemembered: false,
   message: "",
   email: "",
   // password: "",
   firstName: "",
   lastName: "",
   // id: "",
-  isRemembered: false,
 };
 
 //signup user
@@ -110,6 +110,7 @@ export const authSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
       state.isRemembered = false;
+      state.isBackground = false;
     },
     userDataEdited: (state) => {
       state.isEditMode = true;
