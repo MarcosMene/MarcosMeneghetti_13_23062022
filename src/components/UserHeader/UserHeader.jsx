@@ -103,6 +103,7 @@ const UserHeader = () => {
               <div className="input-wrapper">
                 <label htmlFor="firstName">
                   <input
+                    autoComplete="off"
                     type="text"
                     id="firstName"
                     name="firstName"
@@ -114,6 +115,7 @@ const UserHeader = () => {
               <div className="input-wrapper">
                 <label htmlFor="lastName">
                   <input
+                    autoComplete="off"
                     type="text"
                     id="lastName"
                     name="lastName"
