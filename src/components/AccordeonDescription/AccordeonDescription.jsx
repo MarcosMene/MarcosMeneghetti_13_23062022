@@ -37,7 +37,7 @@ const TransactionDescription = () => {
                 onClick={handleFormCategory}
                 className="sign-in-button short"
               >
-                Save
+                Submit
               </button>
             </form>
           </div>
@@ -60,7 +60,7 @@ const TransactionDescription = () => {
                 onClick={handleFormNotes}
                 className="sign-in-button short"
               >
-                Edit
+                Submit
               </button>
             </form>
           </div>

@@ -9,7 +9,7 @@ import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, userRememberMe, reset } from "../../features/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 const USER_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -81,19 +81,11 @@ const Login = () => {
 
       // //all info back to initial state of action reset
       // dispatch(reset());
-    } else if (isSuccess) {
-      localStorage.removeItem("rememberMe");
-      navigate("/profile");
-      if (checked) {
-        localStorage.removeItem("rememberMe");
-        dispatch(userRememberMe());
-        navigate("/profile");
-      }
     }
 
-    // if (isSuccess || user) {
-    //   navigate("/profile");
-    // }
+    if (isSuccess || user) {
+      navigate("/profile");
+    }
   }, [user, isError, isSuccess, message, navigate, dispatch, checked]);
 
   // const onChange = (e) => {

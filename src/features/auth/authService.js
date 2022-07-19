@@ -12,14 +12,8 @@ const signup = async (userData) => {
 };
 
 //login user
-const login = async (userData, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  const response = await axios.post(API_URL + "login", userData, config);
+const login = async (userData) => {
+  const response = await axios.post(API_URL + "login", userData);
 
   if (response.data) {
     localStorage.setItem("ArgentBank", JSON.stringify(response.data));
@@ -59,6 +53,7 @@ const profileUpdate = async (profileUpdateData, token) => {
 //logout user
 const logout = () => {
   localStorage.removeItem("ArgentBank");
+  localStorage.removeItem("persist:root");
 };
 
 const authService = {
