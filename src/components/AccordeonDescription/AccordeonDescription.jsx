@@ -15,6 +15,7 @@ const TransactionDescription = () => {
     e.preventDefault();
     setExpandNotes(!expandNotes);
   };
+
   return (
     <div className="transaction-description">
       <div className="transaction-type">

@@ -15,7 +15,11 @@ const Transactions = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //accountId is a string
   let { accountId } = useParams();
+
+  //convert accountId into number
+  let accountIdNumber = parseInt(accountId, 10);
 
   const AccountMockLenght = infoProfile.length;
   const SingleAccountMock = infoProfile.find(
@@ -37,60 +41,66 @@ const Transactions = () => {
     }
   }, [user, isBackground, navigate]);
 
-  if (user) {
-    return (
-      <main>
-        {accountId > AccountMockLenght || accountId < 1 ? (
-          <div></div>
-        ) : (
-          <button className="back-button" onClick={backButton}>
-            <span className="back-icon">
-              <FontAwesomeIcon icon={faArrowLeftLong} />
-            </span>
+  console.log(accountIdNumber);
 
-            <span className="back-text">Back</span>
-          </button>
-        )}
+  if (isNaN(accountIdNumber)) {
+    return <NotFound />;
+  } else {
+    if (user) {
+      return (
+        <main>
+          {accountIdNumber > AccountMockLenght || accountIdNumber < 1 ? (
+            <div></div>
+          ) : (
+            <button className="back-button" onClick={backButton}>
+              <span className="back-icon">
+                <FontAwesomeIcon icon={faArrowLeftLong} />
+              </span>
 
-        {accountId > AccountMockLenght || accountId < 1 ? (
-          <NotFound />
-        ) : (
-          <>
-            <TransactionsAccount
-              key={SingleAccountMock.id}
-              title={SingleAccountMock.title}
-              amount={SingleAccountMock.amount}
-              amountDescription={SingleAccountMock.amountDescription}
-            />
-            <section className="main bg-light">
-              <h2 className="sr-only">transactions list</h2>
-              <div className="transactions">
-                <div className="transactions-wrapper">
-                  <div className="transactions-list-title">
-                    <p className="transactions-list-text"></p>
-                    <p className="transactions-list-text">DATE</p>
-                    <p className="transactions-list-text">DESCRIPTION</p>
-                    <p className="transactions-list-text">AMOUNT</p>
-                    <p className="transactions-list-text">BALANCE</p>
-                  </div>
-                  <div className="accordeons-list">
-                    {infoTransactions.map((props, index) => (
-                      <Accordeons
-                        date={props.date}
-                        description={props.description}
-                        amount={props.amount}
-                        balance={props.balance}
-                        key={index}
-                      />
-                    ))}
+              <span className="back-text">Back</span>
+            </button>
+          )}
+
+          {accountIdNumber > AccountMockLenght || accountIdNumber < 1 ? (
+            <NotFound />
+          ) : (
+            <>
+              <TransactionsAccount
+                key={SingleAccountMock.id}
+                title={SingleAccountMock.title}
+                amount={SingleAccountMock.amount}
+                amountDescription={SingleAccountMock.amountDescription}
+              />
+              <section className="main bg-light">
+                <h2 className="sr-only">transactions list</h2>
+                <div className="transactions">
+                  <div className="transactions-wrapper">
+                    <div className="transactions-list-title">
+                      <p className="transactions-list-text"></p>
+                      <p className="transactions-list-text">DATE</p>
+                      <p className="transactions-list-text">DESCRIPTION</p>
+                      <p className="transactions-list-text">AMOUNT</p>
+                      <p className="transactions-list-text">BALANCE</p>
+                    </div>
+                    <div className="accordeons-list">
+                      {infoTransactions.map((props, index) => (
+                        <Accordeons
+                          date={props.date}
+                          description={props.description}
+                          amount={props.amount}
+                          balance={props.balance}
+                          key={index}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          </>
-        )}
-      </main>
-    );
+              </section>
+            </>
+          )}
+        </main>
+      );
+    }
   }
 };
 
