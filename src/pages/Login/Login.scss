@@ -18,15 +18,12 @@
     background-color: #00bc77;
     color: #fff;
 
-
     &:disabled,
     &[disabled] {
         border-color: #8ba099;
         background-color: #8ba099;
     }
 }
-
-
 
 .sign-in-icon {
     font-size: 5rem;
@@ -50,21 +47,18 @@
 
 .input-wrapper label {
     font-weight: bold;
-
-
 }
 
 .input-wrapper input {
-    padding: 5px 0;
+    box-sizing: border-box;
+    padding: 5px;
     font-size: 1.2rem;
     width: 98%;
-
 }
 
 .input-wrapper input::placeholder {
     color: rgb(142, 141, 141);
     font-size: .9rem;
-
 }
 
 .sign-button {
@@ -78,16 +72,10 @@
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
-
     color: red;
     padding: 0.25rem;
-    // position: relative;
-    // bottom: -10px;
-}
 
-// .instructions>svg {
-//     margin-right: 0.25rem;
-// }
+}
 
 .offscreen {
     position: absolute;
