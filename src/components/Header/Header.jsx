@@ -18,10 +18,10 @@ const Header = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
-    removePersistLocalStorage();
+    window.localStorage.removeItem(removePersistLocal());
 
-    function removePersistLocalStorage() {
-      window.localStorage.removeItem("persist:root");
+    function removePersistLocal() {
+      return "persist:root";
     }
   };
 
