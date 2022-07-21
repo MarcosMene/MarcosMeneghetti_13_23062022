@@ -53,7 +53,6 @@ const profileUpdate = async (profileUpdateData, token) => {
 //logout user
 const logout = () => {
   localStorage.removeItem("ArgentBank");
-  localStorage.removeItem("persist:root");
 };
 
 const authService = {
