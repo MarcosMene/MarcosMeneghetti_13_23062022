@@ -18,6 +18,11 @@ const Header = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
+    removePersistLocalStorage();
+
+    function removePersistLocalStorage() {
+      window.localStorage.removeItem("persist:root");
+    }
   };
 
   const navigateLogin = () => {
