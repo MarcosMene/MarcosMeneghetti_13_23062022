@@ -9,7 +9,6 @@ import Profile from "./pages/Profile/Profile";
 import Transactions from "./pages/transactions/transactions";
 import "./App.scss";
 import NotFound from "./pages/NotFound/NotFound";
-import SignUp from "./pages/signup/Signup";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route
             exact

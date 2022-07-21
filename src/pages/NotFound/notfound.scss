@@ -3,7 +3,7 @@
     background-position: 80% 0%;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 500px;
+    height: 60vh;
     position: relative;
 }
 
@@ -48,6 +48,7 @@
 @media (min-width: 720px) {
     .hero-not-found {
         background-position: 70% 70%;
+        height: 80vh;
     }
 
     .hero-not-found-content {
@@ -77,6 +78,7 @@
 @media (min-width: 1200px) {
     .hero-not-found {
         background-position: 70% 70%;
+        // height: 80vh;
     }
 
     .hero-not-found-content {
