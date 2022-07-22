@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import ProfileForm from "../Profileform/ProfileForm";
 import { useSelector, useDispatch } from "react-redux";
 import "./UserHeader.scss";
 
@@ -13,6 +12,12 @@ import {
   reset,
 } from "../../features/auth/authSlice";
 import { toast } from "react-toastify";
+
+/**
+ * @name UserHeader
+ * @description It will show the name and last name of user with welcome (firstname) and (lastname). When edit name clicked, it will show a form with options first name and last name. The user can change his name or last name if he wants. When the edit name button clicked, the background of main div change the color.
+ * @returns {JSX.Element}
+ */
 
 const UserHeader = () => {
   const dispatch = useDispatch();
@@ -31,8 +36,11 @@ const UserHeader = () => {
   const stateLastName = useSelector((state) => state.auth.lastName);
   const stateToken = useSelector((state) => state.auth.user.body.token);
 
+  //useState to update or not the name and last name of user
   const [firstNameUpdate, setFirstNameUpdate] = useState();
   const [lastNameUpdate, setLastNameUpdate] = useState();
+
+  //useState show form when edit name button clicked
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -53,16 +61,20 @@ const UserHeader = () => {
     isBackground,
   ]);
 
+  //display a form with first name and last name and background change color to light blue
   const displayForm = () => {
     setShowForm(true);
     dispatch(userBackgroundBlue());
     dispatch(userDataEdited());
   };
+
+  //hide form with first name and last name and background change color to black
   const hideForm = () => {
     setShowForm(false);
     dispatch(userBackgroundBlack());
   };
 
+  //fuction to update or not the name and last name of user
   const editUser = (e) => {
     e.preventDefault();
 
@@ -71,19 +83,10 @@ const UserHeader = () => {
       lastName: lastNameUpdate ? lastNameUpdate : lastName,
     };
 
-    if (
-      (userDataUpdate.firstName === undefined ||
-        userDataUpdate.firstName === null) &&
-      (userDataUpdate.lastName === undefined ||
-        userDataUpdate.lastName === null)
-    ) {
-      toast.error("You must fill first name and last name");
-    } else {
-      dispatch(profileUpdate(userDataUpdate, stateToken));
-      setShowForm(false);
-      dispatch(userBackgroundBlack());
-      dispatch(userDataCancelled());
-    }
+    dispatch(profileUpdate(userDataUpdate, stateToken));
+    setShowForm(false);
+    dispatch(userBackgroundBlack());
+    dispatch(userDataCancelled());
   };
 
   if (stateToken) {
@@ -97,7 +100,6 @@ const UserHeader = () => {
           <span>{stateFirstName + " " + stateLastName}</span>
         </h1>
         {showForm ? (
-          // <section className="form-change-name">
           <form>
             <div className="inputs-form">
               <div className="input-wrapper">
@@ -139,7 +141,6 @@ const UserHeader = () => {
             </div>
           </form>
         ) : (
-          // </section>
           <button type="submit" className="edit-button" onClick={displayForm}>
             Edit Name
           </button>

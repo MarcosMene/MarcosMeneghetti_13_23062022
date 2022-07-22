@@ -12,12 +12,11 @@ import { toast } from "react-toastify";
 import { login, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 
+//regex to user email and password
 const USER_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/;
 
 const Login = () => {
-  const rememberMeLogin = JSON.parse(localStorage.getItem("rememberMe"));
-
   const userRef = useRef();
   const errRef = useRef();
 
@@ -31,34 +30,27 @@ const Login = () => {
 
   const [errMsg, setErrMsg] = useState("");
 
-  const [checked, setChecked] = useState(false);
-
   useEffect(() => {
+    //useRef Access the reference value and focus the input with ref={userRef}
     userRef.current.focus();
   }, []);
 
+  //everytime userEmail changes, it will test the REGEX email. The test() method executes a search for a match between a regular expression and a specified string
   useEffect(() => {
     const result = USER_REGEX.test(userEmail);
-
     setValidEmail(result);
   }, [userEmail]);
 
+  //everytime password changes it will test the REGEX password
   useEffect(() => {
     const result = PWD_REGEX.test(userPassword);
-
     setValidPassword(result);
   }, [userPassword]);
 
+  //everytime password and email change it will test both REGEX
   useEffect(() => {
     setErrMsg("");
   }, [userEmail, userPassword]);
-
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const { email, password } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,28 +64,21 @@ const Login = () => {
       toast.error(message);
       dispatch(reset());
 
+      //if just password is invalid
       if (!setValidPassword) {
         toast.error(message);
       }
+
+      //if just email is invalid
       if (!setValidEmail) {
         toast.error(message);
       }
-
-      // //all info back to initial state of action reset
-      // dispatch(reset());
     }
 
     if (isSuccess || user) {
       navigate("/profile");
     }
-  }, [user, isError, isSuccess, message, navigate, dispatch, checked]);
-
-  // const onChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState, //we want the other fields
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -111,19 +96,6 @@ const Login = () => {
     } else {
       dispatch(login(userData));
     }
-
-    // if (email.length === 0) {
-    //   toast.error("You need enter a valable email");
-    // } else if (password.length < 3) {
-    //   toast.error("Passwords must be at least 4 characters");
-    // } else {
-    //   const userData = {
-    //     email,
-    //     password,
-    //   };
-
-    //   dispatch(login(userData));
-    // }
   };
 
   if (isLoading) {
@@ -146,9 +118,6 @@ const Login = () => {
           <div className="input-wrapper">
             <label htmlFor="username">
               Email
-              {/* <span className={validEmail ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span> */}
               <span className={validEmail || !userEmail ? "hide" : "invalid"}>
                 <FontAwesomeIcon icon={faTimes} />
               </span>
@@ -181,9 +150,6 @@ const Login = () => {
           <div className="input-wrapper">
             <label htmlFor="password">
               Password
-              {/* <span className={validPassword ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span> */}
               <span
                 className={validPassword || !userPassword ? "hide" : "invalid"}
               >
@@ -194,7 +160,6 @@ const Login = () => {
               autoComplete="off"
               type="password"
               id="password"
-              // name="password"
               placeholder="Enter password"
               onChange={(e) => setUserPassword(e.target.value)}
               required
@@ -220,16 +185,12 @@ const Login = () => {
           </div>
           <button
             type="submit"
+            //button disabled until email and password filled
             disabled={!validEmail || !validPassword ? true : false}
             className="sign-in-button"
           >
             Sign In
           </button>
-          {/* <div className="sign-button">
-            <span>
-              Not a member yet? <Link to="/signup">Sign up</Link>
-            </span>
-          </div> */}
         </form>
       </section>
     </main>

@@ -8,12 +8,19 @@ import "./Header.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
 
+/**
+ * @name Header
+ *@description Create a header with a logo, user icon, and SignIn link. When sign in clicked, a sing in page appears. In this page the user can connect to ARGENT BANK.The icon SignOut will appear here with the name of the user only if the user is connected.
+ * @returns {JSX.Element}
+ */
+
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { user, firstName, isSuccess } = useSelector((state) => state.auth);
 
-  //on logout function
+  //logout function
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
@@ -25,6 +32,7 @@ const Header = () => {
     }
   };
 
+  //send to login page
   const navigateLogin = () => {
     navigate("/login");
   };
@@ -39,9 +47,8 @@ const Header = () => {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      {/* <Link to="/" className="main-nav-logo"> */}
-      {/* </Link> */}
       <div className="nav-user">
+        {/* Only appears if user is connected and isSucess is true */}
         {user && isSuccess ? (
           <>
             <FontAwesomeIcon icon={faCircleUser} />

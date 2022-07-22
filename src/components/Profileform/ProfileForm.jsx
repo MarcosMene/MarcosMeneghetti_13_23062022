@@ -1,6 +1,12 @@
 import React from "react";
 import "./ProfileForm.scss";
 
+/**
+ * @name ProfileForm
+ * @description create a form to change or not the first name and last name of user.
+ * @returns {JSX.Element}
+ */
+
 const ProfileForm = () => {
   return (
     <section className="form-change-name">

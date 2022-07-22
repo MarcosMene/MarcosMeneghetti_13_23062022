@@ -10,6 +10,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userBackgroundBlack } from "../../features/auth/authSlice";
 import NotFound from "../NotFound/NotFound";
+import PropTypes from "prop-types";
+
+/**
+ * @name Transactions
+ * @description create a transaction page with the id of account clicked on the profile page
+ * @returns {JSX.Element}
+ */
 
 const Transactions = () => {
   const navigate = useNavigate();
@@ -21,6 +28,7 @@ const Transactions = () => {
   //convert accountId into number
   let accountIdNumber = parseInt(accountId, 10);
 
+  //get the length of arry infoProfile
   const AccountMockLenght = infoProfile.length;
   const SingleAccountMock = infoProfile.find(
     (account) => account.id === parseInt(accountId)
@@ -28,6 +36,7 @@ const Transactions = () => {
 
   const { user, isBackground } = useSelector((state) => state.auth);
 
+  //button to return profile page
   const backButton = () => {
     navigate("/profile");
     if (isBackground) {
@@ -35,14 +44,14 @@ const Transactions = () => {
     }
   };
 
+  //if user is not connected go to login page
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, [user, isBackground, navigate]);
 
-  console.log(accountIdNumber);
-
+  //if url id is not a number, page not found
   if (isNaN(accountIdNumber)) {
     return <NotFound />;
   } else {
@@ -102,6 +111,14 @@ const Transactions = () => {
       );
     }
   }
+};
+
+//infoTransactions proptype
+infoTransactions.propTypes = {
+  date: PropTypes.string,
+  description: PropTypes.string,
+  amount: PropTypes.string,
+  balance: PropTypes.number,
 };
 
 export default Transactions;

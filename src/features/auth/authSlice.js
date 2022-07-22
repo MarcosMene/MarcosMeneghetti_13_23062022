@@ -15,29 +15,10 @@ const initialState = {
   isRemembered: false,
   message: "",
   email: "",
-  // password: "",
   firstName: "",
   lastName: "",
-  // id: "",
 };
 
-//signup user
-export const signup = createAsyncThunk(
-  "auth/signup",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.signup(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
 
 //login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
@@ -104,9 +85,7 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
-      // state.id = "";
       state.email = "";
-      // state.password = "";
       state.firstName = "";
       state.lastName = "";
       state.isRemembered = false;
@@ -129,26 +108,9 @@ export const authSlice = createSlice({
     },
   },
 
+  //extrareducers for async/await functions
   extraReducers: (builder) => {
     builder
-      .addCase(signup.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.user = action.payload; //payload for authService.signup(user) signup function service
-        state.isSignedUp = true;
-        state.isError = false;
-        state.message = "";
-      })
-      .addCase(signup.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload; //payload for message because rejectWithValue(message)
-        state.isSignedUp = false;
-        state.user = null;
-      })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })

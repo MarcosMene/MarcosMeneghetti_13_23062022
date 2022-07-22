@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/transactions/transactions.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/transactions/transactions.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import TransactionsAccount from "../../components/TransactionHeader/TransactionHeader";
+import Accordeons from "../../components/Accordeons/Accordeons";
+import { infoTransactions } from "../../mock/infoTransactions";
+import { infoProfile } from "../../mock/infoProfile";
+import "./transactions.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userBackgroundBlack } from "../../features/auth/authSlice";
+import NotFound from "../NotFound/NotFound";
+import PropTypes from "prop-types";
+
+/**
+ * @name Transactions
+ * @description create a transaction page with the id of account clicked on the profile page
+ * @returns {JSX.Element}
+ */
+
+const Transactions = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //accountId is a string
+  let { accountId } = useParams();
+
+  //convert accountId into number
+  let accountIdNumber = parseInt(accountId, 10);
+
+  //get the length of arry infoProfile
+  const AccountMockLenght = infoProfile.length;
+  const SingleAccountMock = infoProfile.find(
+    (account) => account.id === parseInt(accountId)
+  );
+
+  const { user, isBackground } = useSelector((state) => state.auth);
+
+  //button to return profile page
+  const backButton = () => {
+    navigate("/profile");
+    if (isBackground) {
+      dispatch(userBackgroundBlack());
+    }
+  };
+
+  //if user is not connected go to login page
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, isBackground, navigate]);
+
+  //if url id is not a number, page not found
+  if (isNaN(accountIdNumber)) {
+    return &lt;NotFound />;
+  } else {
+    if (user) {
+      return (
+        &lt;main>
+          {accountIdNumber > AccountMockLenght || accountIdNumber &lt; 1 ? (
+            &lt;div>&lt;/div>
+          ) : (
+            &lt;button className="back-button" onClick={backButton}>
+              &lt;span className="back-icon">
+                &lt;FontAwesomeIcon icon={faArrowLeftLong} />
+              &lt;/span>
+
+              &lt;span className="back-text">Back&lt;/span>
+            &lt;/button>
+          )}
+
+          {accountIdNumber > AccountMockLenght || accountIdNumber &lt; 1 ? (
+            &lt;NotFound />
+          ) : (
+            &lt;>
+              &lt;TransactionsAccount
+                key={SingleAccountMock.id}
+                title={SingleAccountMock.title}
+                amount={SingleAccountMock.amount}
+                amountDescription={SingleAccountMock.amountDescription}
+              />
+              &lt;section className="main bg-light">
+                &lt;h2 className="sr-only">transactions list&lt;/h2>
+                &lt;div className="transactions">
+                  &lt;div className="transactions-wrapper">
+                    &lt;div className="transactions-list-title">
+                      &lt;p className="transactions-list-text">&lt;/p>
+                      &lt;p className="transactions-list-text">DATE&lt;/p>
+                      &lt;p className="transactions-list-text">DESCRIPTION&lt;/p>
+                      &lt;p className="transactions-list-text">AMOUNT&lt;/p>
+                      &lt;p className="transactions-list-text">BALANCE&lt;/p>
+                    &lt;/div>
+                    &lt;div className="accordeons-list">
+                      {infoTransactions.map((props, index) => (
+                        &lt;Accordeons
+                          date={props.date}
+                          description={props.description}
+                          amount={props.amount}
+                          balance={props.balance}
+                          key={index}
+                        />
+                      ))}
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/section>
+            &lt;/>
+          )}
+        &lt;/main>
+      );
+    }
+  }
+};
+
+//infoTransactions proptype
+infoTransactions.propTypes = {
+  date: PropTypes.string,
+  description: PropTypes.string,
+  amount: PropTypes.string,
+  balance: PropTypes.number,
+};
+
+export default Transactions;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Accordeonstransactions">Accordeons transactions</a></li><li><a href="global.html#Features">Features</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Hero">Hero</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#ProfileAccount">ProfileAccount</a></li><li><a href="global.html#ProfileForm">ProfileForm</a></li><li><a href="global.html#Spinner">Spinner</a></li><li><a href="global.html#TransactionDescription">TransactionDescription</a></li><li><a href="global.html#Transactions">Transactions</a></li><li><a href="global.html#TransactionsHeader">TransactionsHeader</a></li><li><a href="global.html#UserHeader">UserHeader</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Jul 22 2022 18:42:22 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

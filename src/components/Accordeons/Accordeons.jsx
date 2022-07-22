@@ -3,6 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import "./Accordeons.scss";
 import TransactionDescription from "../AccordeonDescription/AccordeonDescription";
+import PropTypes from "prop-types";
+
+/**
+ * @name Accordeons transactions
+ * @description create accordeons with information with transactions
+ * @param {string} date data of transaction
+ * @param {string} description description of transaction
+ * @param {string} amount amount of transaction
+ * @param {string} balance balance of transaction
+ *
+ * @returns {JSX.Element}
+ */
 
 const Accordeons = ({ date, description, amount, balance }) => {
   const [expanded, setExpanded] = useState(false);
@@ -29,6 +41,14 @@ const Accordeons = ({ date, description, amount, balance }) => {
       {expanded && <TransactionDescription />}
     </article>
   );
+};
+
+//proptypes for Accordeons
+Accordeons.propTypes = {
+  date: PropTypes.string,
+  description: PropTypes.string,
+  amount: PropTypes.string,
+  balance: PropTypes.string,
 };
 
 export default Accordeons;

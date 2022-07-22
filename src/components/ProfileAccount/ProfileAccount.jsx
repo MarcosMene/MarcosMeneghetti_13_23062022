@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import "./ProfileAccount.scss";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-import {
-  userBackgroundBlack,
-  userBackgroundBlue,
-} from "../../features/auth/authSlice";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+/**
+ * @name ProfileAccount
+ * @param {string} title title of profile account
+ * @param {string} amount amount of profile account
+ * @param {string} amountDescription description of amount
+ * @param {number} singleAccountId id of profile account
+ * @returns {JSX.Element}
+ */
 
 const ProfileAccount = ({
   title,
@@ -14,7 +18,7 @@ const ProfileAccount = ({
   amountDescription,
   singleAccountId,
 }) => {
-  const { isEditMode, isBackground } = useSelector((state) => state.auth);
+  const { isBackground } = useSelector((state) => state.auth);
   const accountId = singleAccountId;
 
   return (
@@ -38,6 +42,14 @@ const ProfileAccount = ({
       </div>
     </section>
   );
+};
+
+//profile account proptype
+ProfileAccount.propTypes = {
+  title: PropTypes.string,
+  amount: PropTypes.string,
+  amountDescription: PropTypes.string,
+  singleAccountId: PropTypes.number,
 };
 
 export default ProfileAccount;

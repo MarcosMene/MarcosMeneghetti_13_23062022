@@ -1,6 +1,12 @@
 import React from "react";
 import "./Hero.scss";
 
+/**
+ * @name Hero
+ * @description create a hero element inside home page.
+ * @returns {JSX.Element}
+ */
+
 const Hero = () => {
   return (
     <div className="hero">

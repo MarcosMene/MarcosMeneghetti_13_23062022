@@ -11,8 +11,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// import profileReducer from "../features/profile/profileSlice";
 
+//create presist with key root
 const persistConfig = {
   key: "root",
   version: 1,
@@ -21,7 +21,6 @@ const persistConfig = {
 
 const reducers = combineReducers({
   auth: authReducer,
-  // profile: profileReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 

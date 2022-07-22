@@ -1,5 +1,15 @@
 import React from "react";
 import "./TransactionHeader.scss";
+import PropTypes from "prop-types";
+
+/**
+ * @name TransactionsHeader
+ * @description show the account clicked on the profile page inside transactions page as the header of transactions.
+ * @param {string} title
+ * @param {string} amount
+ * @param {string} amountDescription
+ * @returns {JSX.Element}
+ */
 
 const TransactionsHeader = ({ title, amount, amountDescription }) => {
   return (
@@ -13,6 +23,13 @@ const TransactionsHeader = ({ title, amount, amountDescription }) => {
       </div>
     </section>
   );
+};
+
+//profile account inside transaction page
+TransactionsHeader.propTypes = {
+  title: PropTypes.string,
+  amount: PropTypes.string,
+  amountDescription: PropTypes.string,
 };
 
 export default TransactionsHeader;

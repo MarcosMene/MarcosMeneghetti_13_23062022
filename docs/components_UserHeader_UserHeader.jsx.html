@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/UserHeader/UserHeader.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/UserHeader/UserHeader.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import "./UserHeader.scss";
+
+import {
+  profile,
+  profileUpdate,
+  userDataEdited,
+  userDataCancelled,
+  userBackgroundBlack,
+  userBackgroundBlue,
+  reset,
+} from "../../features/auth/authSlice";
+import { toast } from "react-toastify";
+
+/**
+ * @name UserHeader
+ * @description It will show the name and last name of user with welcome (firstname) and (lastname). When edit name clicked, it will show a form with options first name and last name. The user can change his name or last name if he wants. When the edit name button clicked, the background of main div change the color.
+ * @returns {JSX.Element}
+ */
+
+const UserHeader = () => {
+  const dispatch = useDispatch();
+
+  const {
+    user,
+    firstName,
+    lastName,
+    message,
+    isError,
+    isEditMode,
+    isBackground,
+  } = useSelector((state) => state.auth);
+
+  const stateFirstName = useSelector((state) => state.auth.firstName);
+  const stateLastName = useSelector((state) => state.auth.lastName);
+  const stateToken = useSelector((state) => state.auth.user.body.token);
+
+  //useState to update or not the name and last name of user
+  const [firstNameUpdate, setFirstNameUpdate] = useState();
+  const [lastNameUpdate, setLastNameUpdate] = useState();
+
+  //useState show form when edit name button clicked
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+      dispatch(reset());
+    }
+
+    dispatch(profile());
+  }, [
+    user,
+    isError,
+    message,
+    dispatch,
+    firstName,
+    lastName,
+    isEditMode,
+    isBackground,
+  ]);
+
+  //display a form with first name and last name and background change color to light blue
+  const displayForm = () => {
+    setShowForm(true);
+    dispatch(userBackgroundBlue());
+    dispatch(userDataEdited());
+  };
+
+  //hide form with first name and last name and background change color to black
+  const hideForm = () => {
+    setShowForm(false);
+    dispatch(userBackgroundBlack());
+  };
+
+  //fuction to update or not the name and last name of user
+  const editUser = (e) => {
+    e.preventDefault();
+
+    const userDataUpdate = {
+      firstName: firstNameUpdate ? firstNameUpdate : firstName,
+      lastName: lastNameUpdate ? lastNameUpdate : lastName,
+    };
+
+    dispatch(profileUpdate(userDataUpdate, stateToken));
+    setShowForm(false);
+    dispatch(userBackgroundBlack());
+    dispatch(userDataCancelled());
+  };
+
+  if (stateToken) {
+    return (
+      &lt;div className="header">
+        &lt;h1
+          className={isBackground ? "header-title black" : "header-title white"}
+        >
+          Welcome back
+          &lt;br />
+          &lt;span>{stateFirstName + " " + stateLastName}&lt;/span>
+        &lt;/h1>
+        {showForm ? (
+          &lt;form>
+            &lt;div className="inputs-form">
+              &lt;div className="input-wrapper">
+                &lt;label htmlFor="firstName">
+                  &lt;input
+                    autoComplete="off"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder={firstName}
+                    onChange={(e) => setFirstNameUpdate(e.target.value)}
+                  />
+                &lt;/label>
+              &lt;/div>
+              &lt;div className="input-wrapper">
+                &lt;label htmlFor="lastName">
+                  &lt;input
+                    autoComplete="off"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder={lastName}
+                    onChange={(e) => setLastNameUpdate(e.target.value)}
+                  />
+                &lt;/label>
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="form-buttons">
+              &lt;button
+                className="button-form"
+                type="submit"
+                onClick={(e) => editUser(e)}
+              >
+                save
+              &lt;/button>
+              &lt;button type="button" className="button-form" onClick={hideForm}>
+                cancel
+              &lt;/button>
+            &lt;/div>
+          &lt;/form>
+        ) : (
+          &lt;button type="submit" className="edit-button" onClick={displayForm}>
+            Edit Name
+          &lt;/button>
+        )}
+      &lt;/div>
+    );
+  }
+};
+
+export default UserHeader;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Accordeonstransactions">Accordeons transactions</a></li><li><a href="global.html#Features">Features</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Hero">Hero</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#ProfileAccount">ProfileAccount</a></li><li><a href="global.html#ProfileForm">ProfileForm</a></li><li><a href="global.html#Spinner">Spinner</a></li><li><a href="global.html#TransactionDescription">TransactionDescription</a></li><li><a href="global.html#Transactions">Transactions</a></li><li><a href="global.html#TransactionsHeader">TransactionsHeader</a></li><li><a href="global.html#UserHeader">UserHeader</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Jul 22 2022 18:42:22 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

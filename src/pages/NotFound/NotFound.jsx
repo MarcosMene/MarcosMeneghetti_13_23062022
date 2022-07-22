@@ -5,6 +5,12 @@ import "./notFound.scss";
 const NotFound = () => {
   const navigate = useNavigate();
 
+  /**
+   * @name NotFound
+   * @description create a page 404 if a url not found.
+   * @return {JSX.Element}
+   */
+
   return (
     <main>
       <div className="hero-not-found">

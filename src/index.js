@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import Spinner from "./components/spinner/Spinner";
 
+//App with store Provider and redux persist
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
