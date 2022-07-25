@@ -1,4 +1,4 @@
-  <img src="./../argentbank/src/assets/argentBankLogo.png" width="180" />  
+  <img src='./src/assets/argentBankLogo.png' width="180" />  
   
 # Projet 13 - Argent Bank - OpenClassrooms
 
