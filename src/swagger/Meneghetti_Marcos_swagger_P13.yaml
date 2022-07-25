@@ -145,7 +145,7 @@ paths:
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for fetching a transaction detail
+      description: API for add new transaction with account ID
       parameters:
         - in: header
           name: Authorization
@@ -160,7 +160,7 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        "201":
           description: User transactions retrieved successully
           schema:
             $ref: "#/definitions/TransactionResponse"
@@ -174,7 +174,7 @@ paths:
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for updating a specific transaction detail
+      description: API for updating a specific transaction account ID detail
       parameters:
         - in: header
           name: Authorization
@@ -209,7 +209,7 @@ paths:
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for updating a user profile
+      description: API for deleting a transaction account ID
       parameters:
         - in: header
           name: Authorization
