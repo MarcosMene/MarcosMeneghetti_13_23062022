@@ -10,7 +10,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userBackgroundBlack } from "../../features/auth/authSlice";
 import NotFound from "../NotFound/NotFound";
-import PropTypes from "prop-types";
 
 /**
  * @name Transactions
@@ -92,12 +91,12 @@ const Transactions = () => {
                       <p className="transactions-list-text">BALANCE</p>
                     </div>
                     <div className="accordeons-list">
-                      {infoTransactions.map((props, index) => (
+                      {infoTransactions.map((items, index) => (
                         <Accordeons
-                          date={props.date}
-                          description={props.description}
-                          amount={props.amount}
-                          balance={props.balance}
+                          date={items.date}
+                          description={items.description}
+                          amount={items.amount}
+                          balance={items.balance}
                           key={index}
                         />
                       ))}
@@ -111,14 +110,6 @@ const Transactions = () => {
       );
     }
   }
-};
-
-//infoTransactions proptype
-infoTransactions.propTypes = {
-  date: PropTypes.string,
-  description: PropTypes.string,
-  amount: PropTypes.string,
-  balance: PropTypes.number,
 };
 
 export default Transactions;

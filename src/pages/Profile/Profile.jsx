@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { infoProfile } from "../../mock/infoProfile";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 
 /**
  * @name Profile
@@ -39,26 +38,18 @@ const Profile = () => {
       <main className={isBackground ? "main bg-light" : "main bg-dark"}>
         <UserHeader />
         <h2 className="sr-only">Accounts</h2>
-        {infoProfile.map((props) => (
+        {infoProfile.map((items) => (
           <ProfileAccount
-            title={props.title}
-            amount={props.amount}
-            amountDescription={props.amountDescription}
-            key={props.id}
-            singleAccountId={props.id}
+            title={items.title}
+            amount={items.amount}
+            amountDescription={items.amountDescription}
+            key={items.id}
+            singleAccountId={items.id}
           />
         ))}
       </main>
     );
   }
-};
-
-//infoProfile proptype
-infoProfile.propTypes = {
-  title: PropTypes.string,
-  amount: PropTypes.string,
-  amountDescription: PropTypes.string,
-  id: PropTypes.number,
 };
 
 export default Profile;
