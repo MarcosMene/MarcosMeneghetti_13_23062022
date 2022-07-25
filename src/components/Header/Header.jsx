@@ -52,7 +52,10 @@ const Header = () => {
         {user && isSuccess ? (
           <>
             <FontAwesomeIcon icon={faCircleUser} />
-            <span>{firstName}</span>
+            <Link to="/profile" className="user-nav-profile">
+              <span>{firstName}</span>
+            </Link>
+
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
             <button className="login-nav-item" onClick={onLogout}>
               SIGN OUT

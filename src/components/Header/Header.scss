@@ -53,6 +53,14 @@
     &>* {
         margin-left: 10px;
     }
+
+    .user-nav-profile {
+        text-decoration: none;
+
+        &:hover {
+            color: #00BC77;
+        }
+    }
 }
 
 
