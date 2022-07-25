@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+  <img src="./../argentbank/src/assets/argentBankLogo.png" width="180" />  
+  
+# Projet 13 - Argent Bank - OpenClassrooms
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Argent Bank is a brand new Bank that want to start into the business.
 
-## Available Scripts
+This project is responsive. You can use this application at any devices (desktop, tablet or mobiles)
 
-In the project directory, you can run:
+##### Project realized by Marcos Meneghetti
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [NodeJS (version 16.15.0 LTS)](https://nodejs.org/en/)
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
-### `npm test`
+Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+# Check Node.js version
+node --version
 
-### `npm run build`
+# Check Mongo version
+mongo --version
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React (v 18.2.0)
+- React-dom (v 18.2.0)
+- React-router-dom (v 6.3.0)
+- Axios (v 0.27.2)
+- Prop-types (v 15.8.1)
+- node-Sass (v 7.0.1)
+- jsdoc: (v 3.6.11)
+- react-toastify: (v 9.0.5)
+- redux: (v 4.2.0)
+- redux/toolkit: (v 1.8.2)
+- ***
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## I have used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Language - JS](https://img.shields.io/static/v1?label=Language&message=JS&color=red&style=for-the-badge&logo=javascript) ![Framework - React](https://img.shields.io/static/v1?label=Framework&message=React&color=green&style=for-the-badge&logo=react) ![Style - SASS](https://img.shields.io/static/v1?label=Style&message=SASS&color=orange&style=for-the-badge&logo=sass) ![Code Editor - VS Studio Code](https://img.shields.io/static/v1?label=Code+Editor&message=VS+Studio+Code&color=yellow&style=for-the-badge&logo=Visual+Studio+Code) ![Node - V16.15.0](https://img.shields.io/static/v1?label=Node&message=V16.15.0&color=brown&style=for-the-badge&logo=Node) ![HTTP Client - Axios](https://img.shields.io/static/v1?label=HTTP+Client&message=Axios&color=purple&style=for-the-badge) ![API documentation - JSDoc](https://img.shields.io/static/v1?label=API+documentation&message=JSDoc&color=pink&style=for-the-badge)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## How to install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Create a main directory
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1- Back-end
 
-### Code Splitting
+1. Download or clone the back-end's repository:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+git clone (https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git)
+```
 
-### Analyzing the Bundle Size
+2. Follow all the instructions on the backend reposity.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<hr/>
+### 2 - Front-end
 
-### Making a Progressive Web App
+1 - Clone this reposity:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+git clone (https://github.com/MarcosMene/MarcosMeneghetti_13_23062022.git)
+```
 
-### Advanced Configuration
+2 - Change the directory to:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+cd MarcosMeneghetti_13_23062022
+```
 
-### Deployment
+Install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+# NPM
+npm install
+```
 
-### `npm run build` fails to minify
+Start the application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+# NPM
+npm start
+```
+
+The application will be rendered at URL `http://localhost:3000`
+
+When the application starts, go to sign in on the top of the page to connect.
+
+#####This projet has only two users:
+
+```
+Tony Stark with password: password123
+Steve Rogers with password: password456
+```
+
+<hr/>
+
+#### Swagger
+
+[My Swagger](https://github.com/MarcosMene/MarcosMeneghetti_13_23062022/tree/main/src/swagger)
