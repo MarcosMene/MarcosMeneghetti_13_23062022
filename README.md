@@ -94,7 +94,7 @@ The application will be rendered at URL `http://localhost:3000`
 
 When the application starts, go to sign in on the top of the page to connect.
 
-#####This projet has only two users:
+##### This project has only two users:
 
 ```
 Tony Stark with password: password123
