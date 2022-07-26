@@ -54,42 +54,39 @@ If you are working with several versions of NodeJS, we recommend you install [nv
 
 - Create a main directory
 
-### 1- Back-end
+### 1- Back-End
 
-1. Download or clone the back-end's repository:
-
-```
-git clone (https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git)
-```
+1. Download or clone the back-end's repository: [Back-end](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
 
 2. Follow all the instructions on the backend reposity.
 
 <hr/>
-### 2 - Front-end
 
-1 - Clone this reposity:
+### 2 - Front-End
+
+1 - Create new terminal on VsCode.
+
+2 - Clone this reposity:
 
 ```
-git clone (https://github.com/MarcosMene/MarcosMeneghetti_13_23062022.git)
+git clone https://github.com/MarcosMene/MarcosMeneghetti_13_23062022.git
 ```
 
-2 - Change the directory to:
+3 - Change the directory to:
 
 ```
 cd MarcosMeneghetti_13_23062022
 ```
 
-Install dependencies:
+4 - Install dependencies:
 
 ```
-# NPM
 npm install
 ```
 
-Start the application:
+5 - Start the application:
 
 ```
-# NPM
 npm start
 ```
 
