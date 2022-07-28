@@ -104,9 +104,6 @@ export const authSlice = createSlice({
     userBackgroundBlue: (state) => {
       state.isBackground = true;
     },
-    userRememberMe: (state) => {
-      state.isRemembered = true;
-    },
   },
 
   //extrareducers for async/await functions
@@ -176,6 +173,5 @@ export const {
   userDataCancelled,
   userBackgroundBlack,
   userBackgroundBlue,
-  userRememberMe,
 } = authSlice.actions;
 export default authSlice.reducer;
