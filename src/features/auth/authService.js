@@ -12,6 +12,7 @@ const login = async (userData) => {
   return response.data;
 };
 
+//profile user
 const profile = async (profileData, token) => {
   const config = {
     headers: {
@@ -23,6 +24,7 @@ const profile = async (profileData, token) => {
   return response.data.body;
 };
 
+//profile update user
 const profileUpdate = async (profileUpdateData, token) => {
   const config = {
     headers: {
@@ -44,7 +46,7 @@ const logout = () => {
 };
 
 const authService = {
-   profile,
+  profile,
   profileUpdate,
   logout,
   login,
