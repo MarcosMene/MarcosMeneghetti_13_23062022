@@ -19,7 +19,6 @@ const initialState = {
   lastName: "",
 };
 
-
 //login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
@@ -33,6 +32,7 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+//profile
 export const profile = createAsyncThunk(
   "auth/profile",
   async (profileData, thunkAPI) => {
@@ -52,6 +52,7 @@ export const profile = createAsyncThunk(
   }
 );
 
+//profile update
 export const profileUpdate = createAsyncThunk(
   "auth/profileUpdate",
   async (profileUpdateData, thunkAPI) => {
