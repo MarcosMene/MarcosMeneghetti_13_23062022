@@ -112,40 +112,40 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/transactions:
+  /transactions:
     get:
       security:
         - Bearer: []
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API to get transactions of a connected user
+      description: API to get month's transactions of a connected user
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
           type: string
-
+          
       produces:
         - application/json
       responses:
         "200":
-          description: User transactions retrieved successully
+          description: User month's transactions retrieved successully
           schema:
             $ref: "#/definitions/TransactionResponse"
         "400":
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/transactions/{accountId}:
-    post:
+  /transactions/{transactionId}:
+    get:
       security:
         - Bearer: []
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for add new transaction with account ID
+      description: API to get a a specific transaction detail
       parameters:
         - in: header
           name: Authorization
@@ -153,15 +153,50 @@ paths:
           required: true
           type: string
         - in: path
-          name: accountId
+          name: transactionId
           type: number
           required: true
-          description: transaction ID to URL
+         
       produces:
         - application/json
       responses:
         "201":
-          description: User transactions retrieved successully
+          description: User transaction retrieved successully
+          schema:
+            $ref: "#/definitions/TransactionResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions Module
+      summary: User transactions API
+      description: API for add new transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          type: number
+          required: true
+        - in: body
+          name: body
+          description: transaction payload
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+          
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: User transaction retrieved successully
           schema:
             $ref: "#/definitions/TransactionResponse"
         "400":
@@ -174,7 +209,7 @@ paths:
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for updating a specific transaction account ID detail
+      description: API for updating a specific transaction detail
       parameters:
         - in: header
           name: Authorization
@@ -182,10 +217,9 @@ paths:
           required: true
           type: string
         - in: path
-          name: accountId
+          name: transactionId
           type: number
           required: true
-          description: transaction ID to URL
         - in: body
           name: body
           description: Update a specific transaction detail
@@ -209,7 +243,7 @@ paths:
       tags:
         - User Transactions Module
       summary: User transactions API
-      description: API for deleting a transaction account ID
+      description: API for deleting a specific transaction
       parameters:
         - in: header
           name: Authorization
@@ -217,7 +251,7 @@ paths:
           required: true
           type: string
         - in: path
-          name: accountId
+          name: transactionId
           type: number
           required: true
 
@@ -287,11 +321,39 @@ definitions:
       lastName:
         type: string
   Transaction:
+    type: object
     properties:
-      category:
-        type: string
-      notes:
-        type: string
+     
+      body:
+        type: array
+        items:
+          type: object
+          properties:
+           
+            date:
+              type: string
+              description: transaction date
+            description:
+              type: string
+              description: transaction description
+            amount:
+              type: number
+              description: transaction amount
+            balance:
+              type: number
+              description: transaction description
+            transactionType:
+              type: string
+              description: transaction type
+            category:
+              type: string
+              description: transaction category
+            note:
+              type: string
+              description: transaction note
+
+   
+   
   TransactionResponse:
     type: object
     properties:
